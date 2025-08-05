@@ -62,7 +62,7 @@ function Home() {
 
   return (
     <div className="container">
-      <h2>React Form with Red Error Border</h2>
+      <h2> -- LOG IN -- </h2>
       <form onSubmit={handleSubmit} noValidate>
         <div className="form-group">
           <label>Name:</label>
