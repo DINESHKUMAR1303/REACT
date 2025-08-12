@@ -2,7 +2,7 @@ import React  from 'react';
 import Demo from "./Demo";
 import Home from './Home'
 import Contact from './Content';
-
+import Context from './Context';
 
 
 function App(){
@@ -13,13 +13,10 @@ function App(){
             
 {/*             
               <Home/>
-              <Demo res={isMounted}/> */}
+              <Demo res={isMounted}/> 
+               <Contact/> */}
+            <Context/>
 
-              
-              
-            
-              
-            <Contact/>
 
         
         </div>
