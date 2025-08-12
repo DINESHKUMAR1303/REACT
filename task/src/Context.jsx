@@ -45,21 +45,21 @@ function StyleButtons() {
         style={{ ...buttonStyle, backgroundColor: "red" }}
         onClick={() => setStyle({ fontSize: "20px", color: "red" })}
       >
-        Small & Red
+        1
       </button>
 
       <button
         style={{ ...buttonStyle, backgroundColor: "blue" }}
         onClick={() => setStyle({ fontSize: "30px", color: "blue" })}
       >
-        Medium & Blue
+        2
       </button>
 
       <button
         style={{ ...buttonStyle, backgroundColor: "green" }}
         onClick={() => setStyle({ fontSize: "40px", color: "green" })}
       >
-        Large & Green
+        3
       </button>
     </div>
   );
