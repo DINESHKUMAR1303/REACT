@@ -8,9 +8,11 @@ import Myhook from './Myhook'
 function App(){
     return (
         <div>
+
+            <Home/>
             
-             { <Demo do="dinesh"/> }
-             <Myhook do="manoj"/>
+             {/* { <Demo do="dinesh"/> }
+             <Myhook do="manoj"/> */}
               
 
         
