@@ -136,9 +136,9 @@ export default function Sample1() {
       </div>
 
       <div className="buttons">
-        <button className="cancel">cancel</button>
+        
         <button className="add" onClick={addTask}>Add Task</button>
       </div>
     </div>
   );
-} 
+}

@@ -92,13 +92,6 @@ input, select {
   gap: 10px;
 }
 
-.cancel {
-  background: none;
-  border: none;
-  color: #555;
-  cursor: pointer;
-}
-
 .add {
   background-color: #1976d2;
   color: white;
