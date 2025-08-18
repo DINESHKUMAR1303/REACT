@@ -24,8 +24,7 @@ function App(){
               <Sample1/>*/}
 
               <Login />
-               <hr />
-              <Signup /> 
+              
      
 
 
