@@ -5,6 +5,9 @@ import Contact from './Content';
 import Context from './Context';
 import Sample from './Sample';
 import Sample1 from './Sample1';
+import Login from "./Login";
+import Signup from "./Signup";
+
 
 
 
@@ -17,8 +20,13 @@ function App(){
               <Home/>
               <Demo res={isMounted}/> 
               <Contact/> 
-              <Context/> */}
-              <Sample1/>
+              <Context/> 
+              <Sample1/>*/}
+
+              <Login />
+               <hr />
+              <Signup /> 
+     
 
 
         
