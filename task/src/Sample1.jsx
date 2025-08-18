@@ -113,31 +113,32 @@ export default function Sample1() {
         </tbody>
       </table>
 
-      {/* Add Task Form */}
+    
       <div className="form">
-        <input
+        <input 
           type="text"
-          placeholder="Member Name"
+          placeholder=" Member Name"
           value={name}
           onChange={(e) => setName(e.target.value)}
         />
-        <input
-          type="text"
-          placeholder="Task Description"
-          value={task}
+        <input  
+        type="text"
+          placeholder=" Task"
+          value={task}  
           onChange={(e) => setTask(e.target.value)}
         />
         <select value={priority} onChange={(e) => setPriority(e.target.value)}>
-          <option>Low</option>
-          <option>Middle</option>
-          <option>High</option>
+          <option value="Low">Low</option>
+          <option value="Middle">Middle</option>  
+          <option value="High">High</option>
         </select>
+    
       </div>
 
       <div className="buttons">
-        <button className="cancel">Cancel</button>
+        <button className="cancel">cancel</button>
         <button className="add" onClick={addTask}>Add Task</button>
       </div>
     </div>
   );
-}
+} 
