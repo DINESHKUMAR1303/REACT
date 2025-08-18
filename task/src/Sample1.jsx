@@ -112,6 +112,7 @@ export default function Sample1() {
           ))}
         </tbody>
       </table>
+      <hr />
 
     
       <div className="form">
@@ -134,6 +135,8 @@ export default function Sample1() {
         </select>
     
       </div>
+
+      
 
       <div className="buttons">
         
