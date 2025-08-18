@@ -112,7 +112,8 @@ export default function Sample1() {
           ))}
         </tbody>
       </table>
-      <hr />
+
+      
 
     
       <div className="form">
