@@ -17,14 +17,16 @@
 }
 .caption {
   position: absolute;
-  bottom: 30px;
-  left: 30px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   background: rgba(0, 0, 0, 0.6);
   color: #fff;
-  padding: 12px 20px;
-  border-radius: 8px;
-  font-size: 18px;
+  padding: 15px 25px;
+  border-radius: 10px;
+  font-size: 20px;
   font-weight: bold;
+  text-align: center;
 }
 
 /* Right Side (Form) */
@@ -155,3 +157,34 @@ input::placeholder {
   .form-section {
     height: auto;
     padding:
+  }
+}
+  .terms {
+  display: flex;
+  align-items: center;
+  gap: 8px; /* space between checkbox and text */
+  margin: 15px 0;
+  font-size: 14px;
+  color: #ccc;
+}
+
+.terms input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+}
+
+.terms label {
+  cursor: pointer;
+  color: #ccc;
+}
+
+.terms a {
+  color: #4f8cff;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.terms a:hover {
+  text-decoration: underline;
+}

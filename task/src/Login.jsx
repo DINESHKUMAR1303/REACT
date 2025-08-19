@@ -98,21 +98,19 @@ function App() {
 
             <input type="file" {...register("file")} />
 
-            <div className="checkbox-row">
-              <input
-                type="checkbox"
-                {...register("terms", { required: "You must accept terms" })}
-              />
-              <span>
-                I agree to the <a href="#">Terms & Conditions</a>
-              </span>
-            </div>
-            {errors.terms && <p className="error">{errors.terms.message}</p>}
-
+            
             <button type="submit" className="btn">
               Create account
             </button>
           </form>
+
+          <div className="terms">
+  <input type="checkbox" id="terms" />
+  <label htmlFor="terms">
+    I agree to the <a href="#">Terms & Conditions</a>
+  </label>
+</div>
+
 
           <div className="divider">Or register with</div>
           <div className="social-buttons">
