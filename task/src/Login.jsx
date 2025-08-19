@@ -15,7 +15,7 @@ function App() {
 
   return (
     <div className="container">
-      {/* Left Section */}
+     
       <div className="image-section">
         <img
           src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e"
@@ -24,7 +24,7 @@ function App() {
         <div className="caption">Capturing Moments, Creating Memories</div>
       </div>
 
-      {/* Right Section */}
+      
       <div className="form-section">
         <div className="form-box">
           <h2>Create an account</h2>
@@ -45,12 +45,8 @@ function App() {
                 {...register("lastName", { required: "Last name is required" })}
               />
             </div>
-            {errors.firstName && (
-              <p className="error">{errors.firstName.message}</p>
-            )}
-            {errors.lastName && (
-              <p className="error">{errors.lastName.message}</p>
-            )}
+            {errors.firstName && <p className="error">{errors.firstName.message}</p>}
+            {errors.lastName && <p className="error">{errors.lastName.message}</p>}
 
             <input
               type="email"
@@ -70,9 +66,7 @@ function App() {
               placeholder="Enter your password"
               {...register("password", { required: "Password is required" })}
             />
-            {errors.password && (
-              <p className="error">{errors.password.message}</p>
-            )}
+            {errors.password && <p className="error">{errors.password.message}</p>}
 
             <div className="input-row">
               <input
@@ -99,18 +93,18 @@ function App() {
             <input type="file" {...register("file")} />
 
             
+            <div className="terms">
+              <input type="checkbox" id="terms" {...register("terms", { required: true })} />
+              <label htmlFor="terms">
+                I agree to the <a href="#">Terms & Conditions</a>
+              </label>
+            </div>
+            {errors.terms && <p className="error">You must accept the terms</p>}
+
             <button type="submit" className="btn">
               Create account
             </button>
           </form>
-
-          <div className="terms">
-  <input type="checkbox" id="terms" />
-  <label htmlFor="terms">
-    I agree to the <a href="#">Terms & Conditions</a>
-  </label>
-</div>
-
 
           <div className="divider">Or register with</div>
           <div className="social-buttons">
