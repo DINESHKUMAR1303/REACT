@@ -1,140 +1,126 @@
-import React, { useState } from "react";
+import React from "react";
 import { useForm } from "react-hook-form";
 import "./Login.css";
 
 function App() {
-  const [isLogin, setIsLogin] = useState(true);
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
-    reset,
   } = useForm();
 
   const onSubmit = (data) => {
-    console.log(isLogin ? "Login Data:" : "Signup Data:", data);
-    reset();
+    console.log("Form Data:", data);
   };
 
   return (
-    <div className="form-container">
-      
-      <div className="tabs">
-        <button
-          className={isLogin ? "active" : ""}
-          onClick={() => setIsLogin(true)}
-        >
-          Log In
-        </button>
-        <button
-          className={!isLogin ? "active" : ""}
-          onClick={() => setIsLogin(false)}
-        >
-          Sign Up
-        </button>
+    <div className="container">
+      {/* Left Section */}
+      <div className="image-section">
+        <img
+          src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e"
+          alt="Beach"
+        />
+        <div className="caption">Capturing Moments, Creating Memories</div>
       </div>
 
-      <form onSubmit={handleSubmit(onSubmit)} className="form">
-        
-        <label>Email</label>
-        <input
-          type="email"
-          placeholder="example@mail.com"
-          {...register("email", { required: "Email is required" })}
-        />
-        {errors.email && <p className="error">{errors.email.message}</p>}
+      {/* Right Section */}
+      <div className="form-section">
+        <div className="form-box">
+          <h2>Create an account</h2>
+          <p>
+            Already have an account? <a href="#">Log in</a>
+          </p>
 
-      
-        <label>Password</label>
-        <input
-          type="password"
-          placeholder="Enter password"
-          {...register("password", {
-            required: "Password is required",
-            minLength: { value: 6, message: "Min 6 characters required" },
-          })}
-        />
-        {errors.password && <p className="error">{errors.password.message}</p>}
-
-        
-        {!isLogin && (
-          <>
-            <label>Confirm Password</label>
-            <input
-              type="password"
-              placeholder="Re-enter password"
-              {...register("confirmPassword", {
-                required: "Confirm Password is required",
-                validate: (v) =>
-                  v === watch("password") || "Passwords do not match",
-              })}
-            />
-            {errors.confirmPassword && (
-              <p className="error">{errors.confirmPassword.message}</p>
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <div className="input-row">
+              <input
+                type="text"
+                placeholder="First name"
+                {...register("firstName", { required: "First name is required" })}
+              />
+              <input
+                type="text"
+                placeholder="Last name"
+                {...register("lastName", { required: "Last name is required" })}
+              />
+            </div>
+            {errors.firstName && (
+              <p className="error">{errors.firstName.message}</p>
+            )}
+            {errors.lastName && (
+              <p className="error">{errors.lastName.message}</p>
             )}
 
-           
-            <label>Date of Birth</label>
-            <input type="date" {...register("dob", { required: "DOB required" })} />
-            {errors.dob && <p className="error">{errors.dob.message}</p>}
+            <input
+              type="email"
+              placeholder="Email"
+              {...register("email", {
+                required: "Email is required",
+                pattern: {
+                  value: /^[^@ ]+@[^@ ]+\.[^@ .]{2,}$/,
+                  message: "Email is not valid",
+                },
+              })}
+            />
+            {errors.email && <p className="error">{errors.email.message}</p>}
 
-            <label>Country</label>
+            <input
+              type="password"
+              placeholder="Enter your password"
+              {...register("password", { required: "Password is required" })}
+            />
+            {errors.password && (
+              <p className="error">{errors.password.message}</p>
+            )}
+
+            <div className="input-row">
+              <input
+                type="date"
+                {...register("dob", { required: "Date of birth is required" })}
+              />
+              <select {...register("gender", { required: "Gender is required" })}>
+                <option value="">Select Gender</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+              </select>
+            </div>
+            {errors.dob && <p className="error">{errors.dob.message}</p>}
+            {errors.gender && <p className="error">{errors.gender.message}</p>}
+
             <select {...register("country", { required: "Country is required" })}>
-              <option value="">Select country</option>
-              <option value="India">India</option>
-              <option value="USA">USA</option>
-              <option value="UK">UK</option>
-              <option value="Canada">Canada</option>
-              <option value="Australia">Australia</option>
+              <option value="">Select Country</option>
+              <option value="india">India</option>
+              <option value="usa">USA</option>
+              <option value="uk">UK</option>
             </select>
             {errors.country && <p className="error">{errors.country.message}</p>}
 
-           
-            <label>Gender</label>
-            <div className="gender-group">
-              <label>
-                <input type="radio" value="Male" {...register("gender", { required: "Gender is required" })} />
-                Male
-              </label>
-              <label>
-                <input type="radio" value="Female" {...register("gender", { required: "Gender is required" })} />
-                Female
-              </label>
-              <label>
-                <input type="radio" value="Other" {...register("gender", { required: "Gender is required" })} />
-                Other
-              </label>
+            <input type="file" {...register("file")} />
+
+            <div className="checkbox-row">
+              <input
+                type="checkbox"
+                {...register("terms", { required: "You must accept terms" })}
+              />
+              <span>
+                I agree to the <a href="#">Terms & Conditions</a>
+              </span>
             </div>
-            {errors.gender && <p className="error">{errors.gender.message}</p>}
+            {errors.terms && <p className="error">{errors.terms.message}</p>}
 
-           
-            <label>Upload Photo</label>
-            <input
-              type="file"
-              accept="image/*"
-              {...register("photo", { required: "Photo is required" })}
-            />
-            {errors.photo && <p className="error">{errors.photo.message}</p>}
-          </>
-        )}
+            <button type="submit" className="btn">
+              Create account
+            </button>
+          </form>
 
-        
-        {isLogin && (
-          <div className="options">
-            <label>
-              <input type="checkbox" {...register("remember")} /> Remember me
-            </label>
-            <a href="#" className="forgot">
-              Forgot Password?
-            </a>
+          <div className="divider">Or register with</div>
+          <div className="social-buttons">
+            <button className="google-btn">Google</button>
+            <button className="apple-btn">Apple</button>
           </div>
-        )}
-
-        <button type="submit" className="submit-btn">
-          {isLogin ? "Login Now" : "Sign Up Now"}
-        </button>
-      </form>
+        </div>
+      </div>
     </div>
   );
 }
