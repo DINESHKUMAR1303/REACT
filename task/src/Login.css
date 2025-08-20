@@ -59,16 +59,27 @@ a:hover {
 /* Inputs */
 input,
 select {
-  width: 95%;
+  width: 100%;              /* ✅ full width for perfect alignment */
   padding: 12px;
   margin: 8px 0;
   border: none;
   border-radius: 8px;
   background: rgba(28, 28, 46, 0.8);
   color: #fff;
+  font-size: 14px;
+  box-sizing: border-box;   /* ✅ ensures consistent width */
 }
 input::placeholder {
   color: #aaa;
+}
+
+/* File Upload */
+input[type="file"] {
+  background: rgba(28, 28, 46, 0.8);
+  color: #ccc;
+  padding: 10px;
+  border-radius: 8px;
+  cursor: pointer;
 }
 
 /* Two inputs row */
@@ -79,6 +90,7 @@ input::placeholder {
 .input-row input,
 .input-row select {
   flex: 1;
+  width: 100%;   /* ✅ keeps even ending points */
 }
 
 /* Error */
@@ -148,21 +160,18 @@ input::placeholder {
   font-size: 14px;
   margin: 25px 0;
 }
-
 .divider::before,
 .divider::after {
   content: "";
   flex: 1;
   border-bottom: 1px solid #555;
 }
-
 .divider:not(:empty)::before {
   margin-right: 10px;
 }
 .divider:not(:empty)::after {
   margin-left: 10px;
 }
-
 
 /* Social buttons */
 .social-buttons {
