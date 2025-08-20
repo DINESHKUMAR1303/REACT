@@ -59,7 +59,7 @@ a:hover {
 /* Inputs */
 input,
 select {
-  width: 100%;              /* ✅ full width for perfect alignment */
+  width: 100%;             
   padding: 12px;
   margin: 8px 0;
   border: none;
@@ -67,7 +67,7 @@ select {
   background: rgba(28, 28, 46, 0.8);
   color: #fff;
   font-size: 14px;
-  box-sizing: border-box;   /* ✅ ensures consistent width */
+  box-sizing: border-box;   
 }
 input::placeholder {
   color: #aaa;
@@ -90,7 +90,7 @@ input[type="file"] {
 .input-row input,
 .input-row select {
   flex: 1;
-  width: 100%;   /* ✅ keeps even ending points */
+  width: 100%;   
 }
 
 /* Error */
