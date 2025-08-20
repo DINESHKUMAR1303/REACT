@@ -5,8 +5,8 @@ import Contact from './Content';
 import Context from './Context';
 import Sample from './Sample';
 import Sample1 from './Sample1';
-import Login from "./Login";
-import Signup from "./Signup";
+import Login from './Login';
+
 
 
 
