@@ -15,20 +15,17 @@ function App() {
 
   return (
     <div className="container">
-      {/* Left Image Section */}
+      
       <div className="image-section">
         <img
           src="https://images.unsplash.com/photo-1503264116251-35a269479413"
           alt="Creative"
         />
-        <div className="caption">Capturing Moments, Creating Memories</div>
-      </div>
 
-      {/* Form Section */}
-      <div className="form-section">
+        
         <div className="form-box">
-          <h2>Create an account</h2>
-          <p>
+          <h2 className="left-align">Create an account</h2>
+          <p className="left-align">
             Already have an account? <a href="#">Log in</a>
           </p>
 
@@ -45,12 +42,8 @@ function App() {
                 {...register("lastName", { required: "Last name is required" })}
               />
             </div>
-            {errors.firstName && (
-              <p className="error">{errors.firstName.message}</p>
-            )}
-            {errors.lastName && (
-              <p className="error">{errors.lastName.message}</p>
-            )}
+            {errors.firstName && <p className="error">{errors.firstName.message}</p>}
+            {errors.lastName && <p className="error">{errors.lastName.message}</p>}
 
             <input
               type="email"
@@ -70,9 +63,7 @@ function App() {
               placeholder="Enter your password"
               {...register("password", { required: "Password is required" })}
             />
-            {errors.password && (
-              <p className="error">{errors.password.message}</p>
-            )}
+            {errors.password && <p className="error">{errors.password.message}</p>}
 
             <div className="input-row">
               <input
@@ -103,7 +94,7 @@ function App() {
             </button>
           </form>
 
-          {/* Terms Section (unchanged alignment) */}
+      
           <div className="terms">
             <input type="checkbox" id="terms" />
             <label htmlFor="terms">

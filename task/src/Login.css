@@ -1,79 +1,77 @@
-/* Layout */
+/* Full container */
 .container {
-  display: flex;
   height: 100vh;
   font-family: "Poppins", sans-serif;
 }
 
-/* Left Side (Image) */
+/* Background Image */
 .image-section {
-  flex: 1;
   position: relative;
+  width: 100%;
+  height: 100%;
 }
 .image-section img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  filter: brightness(0.65);
 }
-.caption {
+
+/* Centered Form */
+.form-box {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background: rgba(0, 0, 0, 0.6);
+  width: 90%;
+  max-width: 420px;
+  padding: 30px;
+  border-radius: 15px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(12px);
   color: #fff;
-  padding: 15px 25px;
-  border-radius: 10px;
-  font-size: 20px;
-  font-weight: bold;
-  text-align: center;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
 }
 
-/* Right Side (Form) */
-.form-section {
-  flex: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: #0d0d1f;
-  color: #fff;
+/* Left aligned heading and text */
+.left-align {
+  text-align: left;
 }
 
-.form-box {
-  width: 80%;
-  max-width: 400px;
-}
-
+/* Heading */
 h2 {
   font-size: 26px;
   margin-bottom: 8px;
 }
 p {
   font-size: 14px;
-  color: #ccc;
+  color: #ddd;
   margin-bottom: 20px;
 }
 a {
   color: #7d5fff;
   text-decoration: none;
 }
+a:hover {
+  text-decoration: underline;
+}
 
 /* Inputs */
 input,
 select {
-  width: 100%;
+  width: 95%;
   padding: 12px;
   margin: 8px 0;
   border: none;
-  border-radius: 6px;
-  background: #1c1c2e;
+  border-radius: 8px;
+  background: rgba(28, 28, 46, 0.8);
   color: #fff;
 }
 input::placeholder {
   color: #aaa;
 }
 
-/* Two inputs in one row */
+/* Two inputs row */
 .input-row {
   display: flex;
   gap: 10px;
@@ -81,15 +79,6 @@ input::placeholder {
 .input-row input,
 .input-row select {
   flex: 1;
-}
-
-/* Checkbox */
-.checkbox-row {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin: 12px 0;
-  font-size: 14px;
 }
 
 /* Error */
@@ -104,9 +93,9 @@ input::placeholder {
 .btn {
   width: 100%;
   padding: 12px;
-  background: linear-gradient(90deg, #6a5acd, #7d5fff);
+  background: linear-gradient(135deg, #6a5acd, #7d5fff);
   border: none;
-  border-radius: 6px;
+  border-radius: 8px;
   color: #fff;
   font-size: 16px;
   cursor: pointer;
@@ -116,15 +105,66 @@ input::placeholder {
   opacity: 0.9;
 }
 
-/* Divider */
-.divider {
-  text-align: center;
-  margin: 20px 0;
-  color: #aaa;
+/* Terms */
+.terms {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 10px;
+  margin: 15px 0;
   font-size: 14px;
+  color: #ccc;
+  width: 100%;
 }
 
-/* Social Buttons */
+.terms input[type="checkbox"] {
+  flex-shrink: 0;
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+}
+
+.terms label {
+  flex: 1;
+  cursor: pointer;
+  line-height: 1.4;
+}
+
+.terms a {
+  color: #4f8cff;
+  text-decoration: none;
+  font-weight: 500;
+}
+.terms a:hover {
+  text-decoration: underline;
+}
+
+/* Divider */
+.divider {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  color: #aaa;
+  font-size: 14px;
+  margin: 25px 0;
+}
+
+.divider::before,
+.divider::after {
+  content: "";
+  flex: 1;
+  border-bottom: 1px solid #555;
+}
+
+.divider:not(:empty)::before {
+  margin-right: 10px;
+}
+.divider:not(:empty)::after {
+  margin-left: 10px;
+}
+
+
+/* Social buttons */
 .social-buttons {
   display: flex;
   gap: 10px;
@@ -133,7 +173,7 @@ input::placeholder {
   flex: 1;
   padding: 10px;
   border: none;
-  border-radius: 6px;
+  border-radius: 8px;
   cursor: pointer;
   font-weight: bold;
 }
@@ -142,50 +182,14 @@ input::placeholder {
   color: #333;
 }
 .apple-btn {
-  background: #fff;
-  color: #000;
+  background: #000;
+  color: #fff;
 }
 
 /* Responsive */
-@media (max-width: 900px) {
-  .container {
-    flex-direction: column;
+@media (max-width: 600px) {
+  .form-box {
+    padding: 20px;
+    max-width: 95%;
   }
-  .image-section {
-    height: 40vh;
-  }
-  .form-section {
-    height: auto;
-    padding:
-  }
-}
-  
-  .terms {
-  display: flex;
-  align-items: center;
-  gap: 8px; /* space between checkbox and text */
-  margin: 15px 0;
-  font-size: 14px;
-  color: #ccc;
-}
-
-.terms input[type="checkbox"] {
-  width: 16px;
-  height: 16px;
-  cursor: pointer;
-}
-
-.terms label {
-  cursor: pointer;
-  color: #ccc;
-}
-
-.terms a {
-  color: #4f8cff;
-  text-decoration: none;
-  font-weight: 500;
-}
-
-.terms a:hover {
-  text-decoration: underline;
 }
