@@ -1,12 +1,11 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
-import Home from "./pages/Home";
-import Menu from "./pages/Menu";
-import Contact from "./pages/Contact";
-import "./App.css";
+import Home from "./components/Home";
+import Menu from "./components/Menu";
+import Contact from "./components/Contact";
 
-function App() {
+const App = () => {
   return (
     <>
       <Navbar />
@@ -17,6 +16,6 @@ function App() {
       </Routes>
     </>
   );
-}
+};
 
 export default App;
