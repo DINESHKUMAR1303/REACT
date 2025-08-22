@@ -1,12 +1,12 @@
 import React from "react";
+import "../App.css";
 
-export default function Footer() {
+const Footer = () => {
   return (
     <footer className="footer">
-      <p>© 2025 Foodies. All rights reserved.</p>
-      <div className="social-icons">
-        <a href="#">Facebook</a> | <a href="#">Instagram</a> | <a href="#">Twitter</a>
-      </div>
+      <p>© 2025 Foodie. All rights reserved.</p>
     </footer>
   );
-}
+};
+
+export default Footer;

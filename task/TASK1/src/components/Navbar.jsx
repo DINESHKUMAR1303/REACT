@@ -1,23 +1,33 @@
 import React, { useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "../App.css";
 
-export default function Navbar() {
-  const [open, setOpen] = useState(false);
-  const location = useLocation();
+const Navbar = () => {
+  const [isOpen, setIsOpen] = useState(false);
 
-  const toggleMenu = () => setOpen(!open);
+  const toggleMenu = () => {
+    setIsOpen(!isOpen);
+  };
 
   return (
-    <header className="header">
-      <div className="logo">Foodies</div>
-      <nav className={open ? "nav open" : "nav"}>
-        <Link to="/" className={location.pathname === "/" ? "active" : ""}>Home</Link>
-        <Link to="/menu" className={location.pathname === "/menu" ? "active" : ""}>Menu</Link>
-        <Link to="/about" className={location.pathname === "/about" ? "active" : ""}>About</Link>
-        <Link to="/contact" className={location.pathname === "/contact" ? "active" : ""}>Contact</Link>
-      </nav>
-      <button className="toggleBtn" onClick={toggleMenu}>☰</button>
-    </header>
+    <nav className="navbar">
+      <div className="logo">Foodie</div>
+      <div className="hamburger" onClick={toggleMenu}>
+        ☰
+      </div>
+      <ul className={`nav-links ${isOpen ? "active" : ""}`}>
+        <li>
+          <Link to="/" onClick={() => setIsOpen(false)}>Home</Link>
+        </li>
+        <li>
+          <Link to="/menu" onClick={() => setIsOpen(false)}>Menu</Link>
+        </li>
+        <li>
+          <Link to="/contact" onClick={() => setIsOpen(false)}>Contact</Link>
+        </li>
+      </ul>
+    </nav>
   );
-}
+};
+
+export default Navbar;
