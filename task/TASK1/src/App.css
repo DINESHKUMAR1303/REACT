@@ -146,3 +146,48 @@
   background-color: #222;
   color: white;
 }
+
+
+
+/* Popular Foods Section */
+.popular-foods {
+  text-align: center;
+  padding: 60px 10%;
+  background-color: #fff;
+}
+.popular-foods h2 {
+  font-size: 36px;
+  margin-bottom: 40px;
+  color: #333;
+}
+.food-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 25px;
+}
+.food-card {
+  background: #fff;
+  border-radius: 15px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  transition: transform 0.3s ease;
+}
+.food-card:hover {
+  transform: translateY(-8px);
+}
+.food-card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 12px;
+  margin-bottom: 15px;
+}
+.food-card h3 {
+  font-size: 22px;
+  margin-bottom: 8px;
+  color: #ff6347;
+}
+.food-card p {
+  color: #555;
+  font-size: 16px;
+}
