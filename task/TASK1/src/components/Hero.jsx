@@ -1,17 +1,13 @@
 import React from "react";
-import heroImg from "../images/food.jpg";
-import "../App.css";
+import heroImage from "../images/pizza.jpg";
 
 const Hero = () => {
   return (
     <section className="hero">
+      <img src={heroImage} alt="Delicious Pizza" className="hero-image" />
       <div className="hero-text">
-        <h1>Delicious Food Delivered to Your Doorstep</h1>
-        <p>Order your favorite meals anytime, anywhere.</p>
-        <button className="order-btn">Order Now</button>
-      </div>
-      <div className="hero-image">
-         <img src={heroImg} alt="Food" />
+        <h1>Welcome to Foodies</h1>
+        <p>Your favorite meals delivered fresh and fast!</p>
       </div>
     </section>
   );

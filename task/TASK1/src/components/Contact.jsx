@@ -1,16 +1,11 @@
 import React from "react";
-import "../App.css";
 
 const Contact = () => {
   return (
-    <section className="contact-page">
+    <section className="contact">
       <h2>Contact Us</h2>
-      <form className="contact-form">
-        <input type="text" placeholder="Your Name" required />
-        <input type="email" placeholder="Your Email" required />
-        <textarea placeholder="Your Message" required></textarea>
-        <button type="submit">Send Message</button>
-      </form>
+      <p>Email: support@foodies.com</p>
+      <p>Phone: +91 98765 43210</p>
     </section>
   );
 };
