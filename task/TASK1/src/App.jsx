@@ -8,23 +8,26 @@ import Burger from "./components/Burger";
 import Pasta from "./components/Pasta";
 import Salad from "./components/Salad";
 import Footer from "./components/Footer";
+import "./App.css"; // Make sure to include CSS
 
 function App() {
   return (
-    <>
+    <div className="app-container">
       <Navbar />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/menu" element={<Menu />}>
-          <Route path="pizza" element={<Pizza />} />
-          <Route path="burger" element={<Burger />} />
-          <Route path="pasta" element={<Pasta />} />
-          <Route path="salad" element={<Salad />} />
-        </Route>
-        <Route path="/contact" element={<Contact />} />
-      </Routes>
+      <div className="main-content">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/menu" element={<Menu />}>
+            <Route path="pizza" element={<Pizza />} />
+            <Route path="burger" element={<Burger />} />
+            <Route path="pasta" element={<Pasta />} />
+            <Route path="salad" element={<Salad />} />
+          </Route>
+          <Route path="/contact" element={<Contact />} />
+        </Routes>
+      </div>
       <Footer />
-    </>
+    </div>
   );
 }
 
