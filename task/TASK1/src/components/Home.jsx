@@ -1,12 +1,15 @@
 import React from "react";
 import Slider from "react-slick";
+import { useNavigate } from "react-router-dom";
 import pizza from "../images/pizza.jpg";
 import burgerImg from "../images/burger.jpg";
 import pastaImg from "../images/pasta.jpg";
 import saladImg from "../images/salad.jpg";
-import "../App.css"; // make sure CSS is linked
+import "../App.css";
 
 const Home = () => {
+  const navigate = useNavigate(); 
+
   const settings = {
     dots: true,
     infinite: true,
@@ -35,7 +38,12 @@ const Home = () => {
           </p>
           <div className="hero-buttons">
             <button className="btn primary-btn">Order Now</button>
-            <button className="btn secondary-btn">View Menu</button>
+            <button
+              className="btn secondary-btn"
+              onClick={() => navigate("/menu")} 
+            >
+              View Menu
+            </button>
           </div>
         </div>
       </section>
