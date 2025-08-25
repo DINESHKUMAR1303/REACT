@@ -75,7 +75,6 @@ body {
 
 
 /* Hero Section */
-/* Wrapper for full background */
 .home-wrapper {
   position: relative;
   background: url(./images/food.jpg) no-repeat center center/cover;
@@ -100,7 +99,7 @@ body {
   z-index: 2;
 }
 
-/* Hero text */
+
 .hero-content h1 {
   font-size: 3rem;
   font-weight: bold;
@@ -244,6 +243,116 @@ body {
   z-index: 1; /* Keeps pizza/pasta content above overlay */
 }
 
+
+/* Contact Section */
+.contact-section {
+  padding: 60px 20px;
+  background: #f8f9fa;
+  text-align: center;
+}
+
+.contact-container {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.contact-container h2 {
+  font-size: 2.5rem;
+  color: #ff4c4c;
+  margin-bottom: 10px;
+}
+
+.contact-subtitle {
+  font-size: 1.2rem;
+  color: #555;
+  margin-bottom: 40px;
+}
+
+.contact-info {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  margin-bottom: 40px;
+}
+
+.contact-card {
+  background: #fff;
+  width: 280px;
+  padding: 20px;
+  margin: 10px;
+  border-radius: 15px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.contact-card:hover {
+  transform: translateY(-10px);
+}
+
+.contact-card i {
+  font-size: 2rem;
+  color: #ff4c4c;
+  margin-bottom: 10px;
+}
+
+.contact-card h3 {
+  font-size: 1.4rem;
+  margin-bottom: 5px;
+}
+
+.contact-card p {
+  color: #666;
+}
+
+/* Contact Form */
+.contact-form {
+  background: #fff;
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.contact-form h3 {
+  margin-bottom: 20px;
+  font-size: 1.8rem;
+  color: #ff4c4c;
+}
+
+.contact-form form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.contact-form input,
+.contact-form textarea {
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+  width: 100%;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+  border-color: #ff4c4c;
+  outline: none;
+}
+
+.contact-form button {
+  padding: 12px;
+  font-size: 1rem;
+  background: #ff4c4c;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.contact-form button:hover {
+  background: #e03e3e;
+}
 
 /* Footer */
 .footer {
