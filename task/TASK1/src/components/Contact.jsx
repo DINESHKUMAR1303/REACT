@@ -1,12 +1,10 @@
-import React from "react";
-
 const Contact = () => {
   return (
-    <section className="contact">
+    <div className="contact">
       <h2>Contact Us</h2>
-      <p>Email: support@foodies.com</p>
-      <p>Phone: +91 98765 43210</p>
-    </section>
+      <p>Email: support@foodiehub.com</p>
+      <p>Phone: +91 9876543210</p>
+    </div>
   );
 };
 

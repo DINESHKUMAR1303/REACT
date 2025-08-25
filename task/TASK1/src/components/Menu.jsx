@@ -1,18 +1,18 @@
 import React from "react";
-import { Outlet, Link } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 
 const Menu = () => {
   return (
-    <section className="menu-section">
-      <h2>Our Menu</h2><br /><hr /><br />
-      <div className="menu-links">
-        <Link to="pizza">Pizza</Link>
-        <Link to="burger">Burger</Link>
-        <Link to="pasta">Pasta</Link>
-        <Link to="salad">Salad</Link>
-      </div>
+    <div className="menu-page">
+      <h1>Our Menu</h1><br /><br />
+      <ul className="menu-links">
+        <li><Link to="pizza">Pizza</Link></li>
+        <li><Link to="burger">Burger</Link></li>
+        <li><Link to="pasta">Pasta</Link></li>
+        <li><Link to="salad">Salad</Link></li>
+      </ul>
       <Outlet />
-    </section>
+    </div>
   );
 };
 

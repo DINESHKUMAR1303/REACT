@@ -37,53 +37,85 @@ body {
   text-decoration: underline;
 }
 
-/* Hero Section */
+/* Hero Section with Background Image */
 .hero {
+  position: relative;
+  height: 90vh;
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  padding: 50px 100px;
-  background: linear-gradient(135deg, #fff0f0, #ffe6e6);
-}
-.hero-content {
-  max-width: 50%;
-}
-.hero-content h1 {
-  font-size: 50px;
-  color: #222;
-}
-.hero-content h1 span {
-  color: #ff6347;
-}
-.hero-content p {
-  margin: 20px 0;
-  font-size: 18px;
-  color: #555;
-}
-.hero-buttons .btn {
-  padding: 12px 25px;
-  margin: 10px;
-  font-size: 16px;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-}
-.primary-btn {
-  background: #ff6347;
+  justify-content: center;
+  text-align: center;
+  background-image: url("../src/images/food.jpg"); /* background image */
+  background-size: cover;
+  background-position: center;
   color: #fff;
 }
-.secondary-btn {
-  background: #fff;
-  color: #ff6347;
-  border: 2px solid #ff6347;
-}
-.hero-image-container {
-  max-width: 45%;
-}
-.hero-image {
+
+.hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
-  border-radius: 15px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6); /* dark overlay for readability */
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 800px;
+  padding: 20px;
+}
+
+.hero-content h1 {
+  font-size: 3rem;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+.hero-content h1 span {
+  color: #ffb703;
+}
+
+.hero-content p {
+  font-size: 1.2rem;
+  margin-bottom: 25px;
+  color: #f1f1f1;
+}
+
+.hero-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+
+.btn {
+  padding: 12px 25px;
+  font-size: 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.primary-btn {
+  background-color: #ffb703;
+  color: #fff;
+  border: none;
+}
+
+.primary-btn:hover {
+  background-color: #f4a261;
+}
+
+.secondary-btn {
+  background-color: transparent;
+  color: #fff;
+  border: 2px solid #fff;
+}
+
+.secondary-btn:hover {
+  background-color: #fff;
+  color: #333;
 }
 
 /* Popular Foods */
@@ -131,3 +163,41 @@ body {
   padding: 15px 0;
   margin-top: 50px;
 }
+
+
+.menu-page {
+  text-align: center;
+  padding: 30px;
+}
+
+.menu-links {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+  margin-bottom: 20px;
+}
+
+.menu-links a {
+  text-decoration: none;
+  color: #ff6347;
+  font-size: 1.2rem;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.menu-links a:hover {
+  color: #333;
+}
+
+.item-page {
+  text-align: center;
+}
+
+.menu-image {
+  width: 400px;
+  border-radius: 12px;
+  margin-top: 15px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+

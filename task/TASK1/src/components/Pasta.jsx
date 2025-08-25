@@ -1,12 +1,10 @@
-import React from "react";
-import pastaImg from "../images/pasta.jpg";
+import pasta from "../images/pasta.jpg";
 
 const Pasta = () => {
   return (
-    <div className="item-card">
-      <img src={pastaImg} alt="Pasta" />
-      <h3>Italian Pasta</h3>
-      <p>Rich and creamy pasta for pasta lovers.</p>
+    <div className="item-page">
+      <h2>Pasta</h2>
+      <img src={pasta} alt="Pasta" className="menu-image" />
     </div>
   );
 };

@@ -1,9 +1,10 @@
 import React from "react";
 import Slider from "react-slick";
-import heroImage from "../images/pizza.jpg";
+import pizza from "../images/pizza.jpg";
 import burgerImg from "../images/burger.jpg";
 import pastaImg from "../images/pasta.jpg";
 import saladImg from "../images/salad.jpg";
+import "../App.css"; // make sure CSS is linked
 
 const Home = () => {
   const settings = {
@@ -24,18 +25,18 @@ const Home = () => {
     <>
       {/* Hero Section */}
       <section className="hero">
+        <div className="hero-overlay"></div>
         <div className="hero-content">
           <h1>
             Taste the <span>Best</span> Food in Town
           </h1>
-          <p>Fresh ingredients, delicious flavors, and quick delivery – all at your fingertips.</p>
+          <p>
+            Fresh ingredients, delicious flavors, and quick delivery – all at your fingertips.
+          </p>
           <div className="hero-buttons">
             <button className="btn primary-btn">Order Now</button>
             <button className="btn secondary-btn">View Menu</button>
           </div>
-        </div>
-        <div className="hero-image-container">
-          <img src={heroImage} alt="Delicious Pizza" className="hero-image" />
         </div>
       </section>
 
@@ -44,7 +45,7 @@ const Home = () => {
         <h2>Popular Foods</h2>
         <Slider {...settings} className="food-slider">
           <div className="food-card">
-            <img src={heroImage} alt="Pizza" />
+            <img src={pizza} alt="Pizza" />
             <h3>Pizza</h3>
             <p>Cheesy and loaded with toppings.</p>
           </div>
