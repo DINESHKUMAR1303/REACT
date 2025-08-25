@@ -8,7 +8,7 @@ import Burger from "./components/Burger";
 import Pasta from "./components/Pasta";
 import Salad from "./components/Salad";
 import Footer from "./components/Footer";
-import "./App.css"; // Make sure to include CSS
+import "./App.css"; 
 
 function App() {
   return (

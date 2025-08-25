@@ -1,6 +1,6 @@
 import React from "react";
 import { Link, Outlet } from "react-router-dom";
-import "./Menu.css"; // Make sure to create this CSS file
+
 
 const Menu = () => {
   return (

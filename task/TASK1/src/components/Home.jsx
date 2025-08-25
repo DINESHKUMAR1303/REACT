@@ -26,7 +26,7 @@ const Home = () => {
 
   return (
     <div className="home-wrapper">
-      {/* Hero + Popular Foods inside the same background */}
+      
       <div className="hero-overlay"></div>
 
       {/* Hero Section */}
