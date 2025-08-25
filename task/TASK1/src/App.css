@@ -75,17 +75,13 @@ body {
 
 
 /* Hero Section */
-.hero {
+/* Wrapper for full background */
+.home-wrapper {
   position: relative;
-  height: 90vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  background-image: url("../src/images/food.jpg"); /* background image */
-  background-size: cover;
-  background-position: center;
+  background: url(./images/food.jpg) no-repeat center center/cover;
   color: #fff;
+  padding: 80px 20px;
+  text-align: center;
 }
 
 .hero-overlay {
@@ -94,141 +90,158 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.6); /* dark overlay for readability */
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 1;
 }
 
-.hero-content {
+.hero-content,
+.popular-foods {
   position: relative;
   z-index: 2;
-  max-width: 800px;
-  padding: 20px;
 }
 
+/* Hero text */
 .hero-content h1 {
   font-size: 3rem;
   font-weight: bold;
-  margin-bottom: 15px;
+  margin-bottom: 20px;
 }
 
 .hero-content h1 span {
-  color: #ffb703;
+  color: #ffcc00;
 }
 
 .hero-content p {
   font-size: 1.2rem;
-  margin-bottom: 25px;
-  color: #f1f1f1;
+  margin-bottom: 30px;
 }
 
 .hero-buttons {
   display: flex;
-  justify-content: center;
   gap: 15px;
+  justify-content: center;
 }
 
 .btn {
-  padding: 12px 25px;
+  padding: 12px 28px;
+  border: none;
+  border-radius: 30px;
   font-size: 1rem;
-  border-radius: 5px;
+  font-weight: 600;
   cursor: pointer;
-  transition: 0.3s;
+  transition: all 0.3s ease;
 }
 
 .primary-btn {
-  background-color: #ffb703;
+  background: #ff4c4c;
   color: #fff;
-  border: none;
 }
 
 .primary-btn:hover {
-  background-color: #f4a261;
+  background: #ff1a1a;
 }
 
 .secondary-btn {
-  background-color: transparent;
-  color: #fff;
-  border: 2px solid #fff;
+  background: #fff;
+  color: #ff4c4c;
+  border: 2px solid #ff4c4c;
 }
 
 .secondary-btn:hover {
-  background-color: #fff;
-  color: #333;
+  background: #ff4c4c;
+  color: #fff;
 }
 
 /* Popular Foods */
 .popular-foods {
-  padding: 50px 80px;
-  text-align: center;
+  margin-top: 50px;
 }
+
 .popular-foods h2 {
-  font-size: 36px;
+  font-size: 2rem;
   margin-bottom: 20px;
-  color: #333;
+  color: #fff;
 }
-.food-slider {
-  padding: 20px;
-}
+
 .food-card {
-  background: #fff;
+  background: rgba(255, 255, 255, 0.15);
   border-radius: 15px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-  padding: 20px;
+  padding: 15px;
   text-align: center;
+  color: #fff;
 }
+
 .food-card img {
   width: 100%;
   height: 200px;
   object-fit: cover;
-  border-radius: 12px;
-  margin-bottom: 15px;
+  border-radius: 10px;
+  margin-bottom: 10px;
 }
-.food-card h3 {
-  font-size: 22px;
-  margin-bottom: 8px;
-  color: #ff6347;
-}
-.food-card p {
-  color: #555;
-  font-size: 16px;
-}
-
 
 
 /* Menu */
 .menu-page {
+  background: url('./images/menu2.jpg') ;
+  background-size: cover;
+  min-height: 100vh;
   text-align: center;
-  padding: 30px;
+  padding: 50px 20px;
+  color: #fff;
+  position: relative;
+  z-index: 1;
+}
+
+
+.menu-page::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: -1; /* This ensures overlay stays behind */
+}
+
+.menu-header {
+  position: relative;
+  z-index: 1;
 }
 
 .menu-links {
-  list-style: none;
   display: flex;
   justify-content: center;
   gap: 25px;
-  margin-bottom: 20px;
+  margin: 30px 0;
+  position: relative;
+  z-index: 1;
+}
+
+.menu-links li {
+  list-style: none;
 }
 
 .menu-links a {
   text-decoration: none;
-  color: #ff6347;
-  font-size: 1.2rem;
-  font-weight: bold;
-  transition: 0.3s;
+  color: #fff;
+  font-size: 1.3rem;
+  font-weight: 600;
+  padding: 12px 25px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  transition: 0.3s ease-in-out;
 }
 
 .menu-links a:hover {
-  color: #333;
+  background: #ffdd57;
+  color: #000;
 }
 
-.item-page {
-  text-align: center;
-}
-
-.menu-image {
-  width: 400px;
-  border-radius: 12px;
-  margin-top: 15px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+.menu-content {
+  margin-top: 40px;
+  position: relative;
+  z-index: 1; /* Keeps pizza/pasta content above overlay */
 }
 
 

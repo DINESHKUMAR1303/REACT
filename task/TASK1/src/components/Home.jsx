@@ -8,7 +8,7 @@ import saladImg from "../images/salad.jpg";
 import "../App.css";
 
 const Home = () => {
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
 
   const settings = {
     dots: true,
@@ -25,26 +25,26 @@ const Home = () => {
   };
 
   return (
-    <>
+    <div className="home-wrapper">
+      {/* Hero + Popular Foods inside the same background */}
+      <div className="hero-overlay"></div>
+
       {/* Hero Section */}
-      <section className="hero">
-        <div className="hero-overlay"></div>
-        <div className="hero-content">
-          <h1>
-            Taste the <span>Best</span> Food in Town
-          </h1>
-          <p>
-            Fresh ingredients, delicious flavors, and quick delivery – all at your fingertips.
-          </p>
-          <div className="hero-buttons">
-            <button className="btn primary-btn">Order Now</button>
-            <button
-              className="btn secondary-btn"
-              onClick={() => navigate("/menu")} 
-            >
-              View Menu
-            </button>
-          </div>
+      <section className="hero-content">
+        <h1>
+          Taste the <span>Best</span> Food in Town
+        </h1>
+        <p>
+          Fresh ingredients, delicious flavors, and quick delivery – all at your fingertips.
+        </p>
+        <div className="hero-buttons">
+          <button className="btn primary-btn">Order Now</button>
+          <button
+            className="btn secondary-btn"
+            onClick={() => navigate("/menu")}
+          >
+            View Menu
+          </button>
         </div>
       </section>
 
@@ -74,7 +74,7 @@ const Home = () => {
           </div>
         </Slider>
       </section>
-    </>
+    </div>
   );
 };
 
