@@ -240,7 +240,7 @@ body {
 .menu-content {
   margin-top: 40px;
   position: relative;
-  z-index: 1; /* Keeps pizza/pasta content above overlay */
+  z-index: 1; 
 }
 
 
