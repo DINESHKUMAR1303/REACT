@@ -181,66 +181,112 @@ body {
 
 /* Menu */
 .menu-page {
-  background: url('./images/menu2.jpg') ;
-  background-size: cover;
-  min-height: 100vh;
-  text-align: center;
-  padding: 50px 20px;
-  color: #fff;
-  position: relative;
-  z-index: 1;
-}
-
-
-.menu-page::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.6);
-  z-index: -1; /* This ensures overlay stays behind */
+  padding: 40px;
+  background: #f8f8f8;
+  font-family: 'Poppins', sans-serif;
 }
 
 .menu-header {
-  position: relative;
-  z-index: 1;
+  text-align: center;
+  margin-bottom: 30px;
 }
 
-.menu-links {
+.menu-header h1 {
+  font-size: 2.8rem;
+  color: #333;
+}
+
+.menu-header p {
+  font-size: 1.2rem;
+  color: #666;
+}
+
+/* Controls (Search + Filters) */
+.menu-controls {
   display: flex;
-  justify-content: center;
-  gap: 25px;
-  margin: 30px 0;
-  position: relative;
-  z-index: 1;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 30px;
 }
 
-.menu-links li {
-  list-style: none;
+.search-bar {
+  width: 300px;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 25px;
+  font-size: 1rem;
+  outline: none;
 }
 
-.menu-links a {
-  text-decoration: none;
+.category-buttons {
+  display: flex;
+  gap: 12px;
+}
+
+.filter-btn {
+  padding: 10px 18px;
+  border-radius: 20px;
+  border: none;
+  background: #eee;
+  color: #333;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.filter-btn:hover,
+.filter-btn.active {
+  background: #ff7f50;
   color: #fff;
-  font-size: 1.3rem;
-  font-weight: 600;
-  padding: 12px 25px;
-  background: rgba(255, 255, 255, 0.2);
+}
+
+/* Menu Grid */
+.menu-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+.menu-card {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  text-align: center;
+  transition: transform 0.3s ease;
+}
+
+.menu-card:hover {
+  transform: translateY(-10px);
+}
+
+.menu-img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
   border-radius: 8px;
-  transition: 0.3s ease-in-out;
 }
 
-.menu-links a:hover {
-  background: #ffdd57;
-  color: #000;
+.menu-card h3 {
+  font-size: 1.3rem;
+  margin: 15px 0 10px;
+  color: #222;
 }
 
-.menu-content {
-  margin-top: 40px;
-  position: relative;
-  z-index: 1; 
+.menu-card p {
+  font-size: 0.95rem;
+  color: #666;
+  margin-bottom: 12px;
+}
+
+.menu-price {
+  display: inline-block;
+  background: #ff7f50;
+  color: #fff;
+  padding: 8px 14px;
+  border-radius: 20px;
+  font-weight: bold;
 }
 
 
