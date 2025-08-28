@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 
 const menuData = {
-  Pizza:
-   [
+  Pizza: [
     {
       name: "Margherita Pizza",
       description: "Classic delight with fresh tomatoes and basil",
@@ -14,6 +13,12 @@ const menuData = {
       description: "Loaded with spicy pepperoni & cheese",
       price: "₹ 350",
       img: "/images/Pepperonipizza.jpg"
+    },
+    {
+      name: "BBQ Chicken Pizza",
+      description: "Smoky BBQ chicken with extra cheese",
+      price: "₹ 400",
+      img: "/images/bbqpizza.webp"
     }
   ],
 
@@ -29,8 +34,15 @@ const menuData = {
       description: "Crispy veggie patty with fresh veggies",
       price: "₹ 150",
       img: "/images/veggieburger.jpg"
+    },
+    {
+      name: "Chicken Burger",
+      description: "Grilled chicken patty with spicy mayo",
+      price: "₹ 200",
+      img: "/images/chickenburger.jpg"
     }
   ],
+
   Pasta: [
     {
       name: "White Sauce Pasta",
@@ -43,8 +55,15 @@ const menuData = {
       description: "Tangy tomato sauce with Italian spices",
       price: "₹ 200",
       img: "/images/redpasta.png"
+    },
+    {
+      name: "Pesto Pasta",
+      description: "Green pesto with parmesan cheese",
+      price: "₹ 240",
+      img: "/images/pestopasta.jpg"
     }
   ],
+
   Salad: [
     {
       name: "Caesar Salad",
@@ -56,7 +75,13 @@ const menuData = {
       name: "Greek Salad",
       description: "Fresh veggies with feta cheese",
       price: "₹ 140",
-      img: "/images/greeksalad.jpg"
+      img: "/images/Greeksalad.webp"
+    },
+    {
+      name: "Fruit Salad",
+      description: "Fresh seasonal fruits with honey drizzle",
+      price: "₹ 160",
+      img: "/images/fruitsalad.jpg"
     }
   ]
 };
