@@ -15,66 +15,84 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 15px 50px;
-  background: linear-gradient(90deg, #ff6f61, #ff9671);
-  color: #fff;
-  font-family: "Poppins", sans-serif;
+  background: linear-gradient(135deg, #1f1f1f, #3b2f2f);
+  padding: 15px 40px;
   position: sticky;
   top: 0;
   z-index: 1000;
+  font-family: "Poppins", sans-serif;
 }
 
 /* Logo */
 .logo {
   font-size: 1.8rem;
-  font-weight: bold;
-  color: #fff;
+  font-weight: 700;
+  color: #f4f4f4;
 }
 
-/* Navigation Links */
+/* Nav Links */
 .nav-links {
   display: flex;
-  gap: 25px;
   list-style: none;
+  gap: 25px;
 }
 
 .nav-links li a {
   text-decoration: none;
-  color: #fff;
+  color: #f4f4f4;
   font-size: 1.1rem;
-  padding: 8px 14px;
+  font-weight: 500;
   transition: 0.3s ease;
+  padding: 8px 12px;
   border-radius: 6px;
 }
 
-/* Hover Effect */
 .nav-links li a:hover {
-  background: rgba(255, 255, 255, 0.2);
+  background-color: #ff6b6b; /* Accent color matching homepage */
+  color: #fff;
 }
 
-/* Active Link */
 .nav-links li a.active {
-  background: #fff;
-  color: #ff6f61;
+  background-color: #ff6b6b;
+  color: #fff;
+  font-weight: 600;
+}
+
+/* Cart Count */
+.cart-count {
+  background: #ff6b6b;
+  color: #fff;
+  padding: 2px 8px;
+  border-radius: 50%;
+  font-size: 0.8rem;
+  margin-left: 4px;
   font-weight: bold;
 }
 
-/* Responsive Design */
+/* Responsive */
 @media (max-width: 768px) {
   .navbar {
     flex-direction: column;
-    padding: 15px;
+    align-items: flex-start;
+    padding: 15px 20px;
   }
+
   .nav-links {
     flex-direction: column;
+    width: 100%;
     gap: 15px;
     margin-top: 10px;
+  }
+
+  .nav-links li a {
+    width: 100%;
+    display: block;
   }
 }
 
 
 
-/* Hero Section */
+/* Home Section */
 .home-wrapper {
   position: relative;
   background: url(./images/food.jpg) no-repeat center center/cover;
@@ -731,96 +749,80 @@ body {
   transform: scale(1.03);
 }
 
-
-
-/* Footer */
 .footer {
-  background: #222;
+  background: linear-gradient(135deg, #1f1f1f, #2c2c2c, #3b2f2f, #1a1a1a);
   color: #fff;
   padding: 50px 20px 20px;
-  font-family: "Poppins", sans-serif;
+  font-family: 'Poppins', sans-serif;
 }
 
 .footer-container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 30px;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 40px;
   max-width: 1200px;
-  margin: auto;
-}
-
-.footer-logo {
-  font-size: 1.8rem;
-  color: #ff6f61;
-  margin-bottom: 15px;
+  margin: 0 auto;
 }
 
 .footer-section h3 {
-  font-size: 1.2rem;
+  color: #ff7043; /* Warm orange accent */
+  font-size: 1.3rem;
   margin-bottom: 15px;
+  font-weight: 600;
 }
 
-.footer-section ul {
-  list-style: none;
-  padding: 0;
-}
-
-.footer-section ul li {
+.footer-logo {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #ff7043;
   margin-bottom: 10px;
 }
 
-.footer-section ul li a {
-  text-decoration: none;
+.footer-section p,
+.footer-section a {
   color: #ddd;
-  transition: 0.3s;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  text-decoration: none;
+  transition: color 0.3s ease-in-out;
 }
 
-.footer-section ul li a:hover {
-  color: #ff6f61;
+.footer-section a:hover {
+  color: #ff7043;
+}
+
+.links ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.links li {
+  margin-bottom: 8px;
 }
 
 .social-icons {
   display: flex;
   gap: 15px;
+  margin-top: 10px;
 }
 
 .social-icons a {
   color: #fff;
   font-size: 1.3rem;
-  transition: 0.3s;
+  transition: transform 0.3s ease, color 0.3s ease;
 }
 
 .social-icons a:hover {
-  color: #ff6f61;
+  color: #ff7043;
+  transform: scale(1.2);
 }
 
 .footer-bottom {
   text-align: center;
   margin-top: 30px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
   font-size: 0.9rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.2);
-  padding-top: 15px;
-}
-
-@media (max-width: 768px) {
-  .footer-container {
-    grid-template-columns: 1fr;
-    text-align: center;
-  }
-}
-
-html, body {
-  height: 100%;
-  margin: 0;
-  padding: 0;
-}
-
-.app-container {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-}
-
-.main-content {
-  flex: 1; /* Takes remaining space */
+  color: #bbb;
 }

@@ -27,8 +27,8 @@ const Footer = () => {
         {/* Contact Info */}
         <div className="footer-section contact">
           <h3>Contact Us</h3>
-          <p>Email: support@foodie.com</p>
-          <p>Phone: +91 98765 43210</p>
+          <p>Email: <a href="mailto:support@foodie.com">support@foodie.com</a></p>
+          <p>Phone: <a href="tel:+919876543210">+91 98765 43210</a></p>
           <p>Address: 123 Foodie Street, Chennai, India</p>
         </div>
 
@@ -46,7 +46,7 @@ const Footer = () => {
 
       {/* Bottom Text */}
       <div className="footer-bottom">
-        <p>© 2025 Foodie. All Rights Reserved.</p>
+        <p>© {new Date().getFullYear()} Foodie. All Rights Reserved.</p>
       </div>
     </footer>
   );
