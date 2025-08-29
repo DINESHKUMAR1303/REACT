@@ -560,234 +560,176 @@ body {
   background: #e03e3e;
 }
 
-/* Cart */
-/* Container */
 .cart-container {
-  width: 380px;
-  margin: auto;
-  padding: 16px;
-  font-family: "Arial", sans-serif;
+  max-width: 600px;
+  margin: 30px auto;
   background: #fff;
-  border-radius: 8px;
+  padding: 20px;
+  border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  animation: fadeIn 0.4s ease-in-out;
+  font-family: "Poppins", sans-serif;
 }
 
-/* Header */
-.cart-header {
+.cart-title {
+  text-align: center;
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  color: #06c167;
+}
+
+.cart-items {
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  gap: 15px;
   margin-bottom: 20px;
 }
 
-.restaurant-logo {
-  width: 50px;
-  height: 50px;
-  border-radius: 6px;
-  margin-right: 12px;
-}
-
-.restaurant-name {
-  font-size: 18px;
-  font-weight: 600;
-  margin: 0;
-}
-
-.restaurant-location {
-  font-size: 14px;
-  color: #777;
-  margin: 2px 0 0 0;
-}
-
-/* Cart Item */
 .cart-item {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin: 16px 0;
-  border-bottom: 1px solid #eee;
-  padding-bottom: 12px;
-  animation: fadeIn 0.4s ease-in-out;
+  background: #f9f9f9;
+  padding: 12px;
+  border-radius: 10px;
+  transition: transform 0.2s ease;
+}
+
+.cart-item:hover {
+  transform: scale(1.02);
 }
 
 .cart-item-img {
-  width: 60px;
-  height: 60px;
+  width: 70px;
+  height: 70px;
+  object-fit: cover;
   border-radius: 8px;
 }
 
-.cart-item-details {
-  flex: 1;
-  margin-left: 10px;
-}
-
 .cart-item-details h4 {
-  font-size: 16px;
   margin: 0;
+  font-size: 16px;
+  font-weight: 500;
 }
 
-/* Quantity Stepper with Animation */
 .quantity-stepper {
   display: flex;
   align-items: center;
-  margin-top: 6px;
+  gap: 10px;
 }
 
-.quantity-stepper button {
+.qty-btn {
   width: 28px;
   height: 28px;
-  background: #eaeaea;
+  background: #06c167;
+  color: white;
   border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 18px;
-  font-weight: bold;
-  transition: transform 0.2s ease, background 0.3s;
-}
-
-.quantity-stepper button:hover {
-  background: #ddd;
-  transform: scale(1.1);
-}
-
-.quantity-stepper span {
-  margin: 0 8px;
+  border-radius: 50%;
   font-size: 16px;
+  cursor: pointer;
+  transition: background 0.3s ease;
 }
 
-/* Price */
+.qty-btn:hover {
+  background: #059456;
+}
+
 .item-price {
-  font-weight: bold;
-  font-size: 15px;
+  font-weight: 600;
+  font-size: 16px;
+  color: #333;
 }
 
 /* Suggestion Box */
 .cart-suggestion {
-  margin: 16px 0;
-  padding: 12px;
-  background: #f7f7f7;
-  border-radius: 6px;
+  margin: 20px 0;
+}
+
+.suggestion-label {
   font-size: 14px;
-  color: #666;
-  animation: fadeIn 0.4s ease-in-out;
+  font-weight: bold;
+  margin-bottom: 8px;
+  display: block;
+}
+
+.suggestion-textarea {
+  width: 100%;
+  padding: 10px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  resize: none;
+  transition: all 0.3s ease;
+}
+
+.suggestion-textarea:focus {
+  border-color: #06c167;
+  box-shadow: 0 0 6px rgba(6, 193, 103, 0.3);
+  outline: none;
+  transform: scale(1.02);
 }
 
 /* No-contact Delivery */
 .cart-option {
-  display: flex;
-  align-items: flex-start;
-  gap: 10px;
-  margin: 16px 0;
-  padding: 12px;
-  border: 1px solid #ddd;
-  border-radius: 6px;
+  margin: 20px 0;
   font-size: 14px;
-  animation: fadeIn 0.4s ease-in-out;
 }
 
-.cart-option input {
-  margin-top: 4px;
-}
-
-/* Coupon Section */
 .cart-coupon {
-  margin: 16px 0;
-  padding: 12px;
-  border: 1px dashed #bbb;
-  border-radius: 6px;
+  background: #e6f8ef;
+  color: #06c167;
+  padding: 10px;
   text-align: center;
-  font-weight: bold;
+  border-radius: 6px;
+  font-weight: 500;
+  margin-bottom: 20px;
   cursor: pointer;
-  color: #333;
-  transition: background 0.3s, transform 0.2s ease;
+  transition: background 0.3s ease;
 }
 
 .cart-coupon:hover {
-  background: #f7f7f7;
-  transform: scale(1.02);
+  background: #d0f3e3;
 }
 
-/* Bill Section */
+/* Bill Details */
 .bill-section {
-  margin-top: 16px;
-}
-
-.bill-section h4 {
-  margin-bottom: 8px;
-  font-size: 16px;
+  background: #f8f8f8;
+  padding: 15px;
+  border-radius: 10px;
+  margin-bottom: 20px;
 }
 
 .bill-row {
   display: flex;
   justify-content: space-between;
-  margin: 6px 0;
-  font-size: 14px;
+  margin: 8px 0;
 }
 
 .bill-total {
   display: flex;
   justify-content: space-between;
-  font-size: 16px;
-  margin-top: 12px;
-  font-weight: bold;
+  font-size: 18px;
+  font-weight: 600;
 }
 
-hr {
-  border: none;
-  border-top: 1px solid #ddd;
-  margin: 8px 0;
-}
-
-/* Checkout Button with Subtle Hover Animation */
+/* Checkout Button */
 .checkout-btn {
   width: 100%;
   padding: 14px;
-  margin-top: 16px;
   background: #06c167;
-  color: white;
-  border: none;
-  border-radius: 6px;
+  color: #fff;
   font-size: 16px;
-  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
   cursor: pointer;
-  transition: background 0.3s, transform 0.2s ease;
+  transition: background 0.3s ease, transform 0.2s ease;
 }
 
 .checkout-btn:hover {
-  background: #059a52;
+  background: #059456;
   transform: scale(1.03);
 }
-
-/* Fade-in Animation for Components */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* Responsive */
-@media (max-width: 480px) {
-  .cart-container {
-    width: 95%;
-    padding: 12px;
-  }
-
-  .cart-item-img {
-    width: 50px;
-    height: 50px;
-  }
-
-  .checkout-btn {
-    font-size: 14px;
-    padding: 12px;
-  }
-}
-
 
 
 

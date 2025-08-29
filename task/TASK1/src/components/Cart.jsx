@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { removeFromCart, increaseQty, decreaseQty } from "../redux/cartslice";
 
@@ -6,6 +6,8 @@ import { removeFromCart, increaseQty, decreaseQty } from "../redux/cartslice";
 const Cart = () => {
   const cartItems = useSelector((state) => state.cart.items);
   const dispatch = useDispatch();
+
+  const [suggestion, setSuggestion] = useState("");
 
   const itemTotal = cartItems.reduce(
     (total, item) => total + item.price * item.quantity,
@@ -17,13 +19,8 @@ const Cart = () => {
 
   return (
     <div className="cart-container">
-      {/* Restaurant Header */}
-      <div className="cart-header">
-        
-       
-      </div>
-
       {/* Cart Items */}
+      <h2 className="cart-title">Your Cart</h2>
       <div className="cart-items">
         {cartItems.map((item) => (
           <div className="cart-item" key={item.id}>
@@ -31,9 +28,19 @@ const Cart = () => {
             <div className="cart-item-details">
               <h4>{item.name}</h4>
               <div className="quantity-stepper">
-                <button onClick={() => dispatch(decreaseQty(item.id))}>-</button>
+                <button
+                  className="qty-btn"
+                  onClick={() => dispatch(decreaseQty(item.id))}
+                >
+                  -
+                </button>
                 <span>{item.quantity}</span>
-                <button onClick={() => dispatch(increaseQty(item.id))}>+</button>
+                <button
+                  className="qty-btn"
+                  onClick={() => dispatch(increaseQty(item.id))}
+                >
+                  +
+                </button>
               </div>
             </div>
             <div className="item-price">₹{item.price * item.quantity}</div>
@@ -41,9 +48,19 @@ const Cart = () => {
         ))}
       </div>
 
-      {/* Suggestions */}
+      {/* Suggestion Box */}
       <div className="cart-suggestion">
-        <p>Any suggestions? We will pass it on…</p>
+        <label htmlFor="suggestion" className="suggestion-label">
+          Any suggestions? We will pass it on…
+        </label>
+        <textarea
+          id="suggestion"
+          className="suggestion-textarea"
+          placeholder="Write your instructions (e.g., no onions)"
+          value={suggestion}
+          onChange={(e) => setSuggestion(e.target.value)}
+          rows="3"
+        />
       </div>
 
       {/* No-contact Delivery */}
