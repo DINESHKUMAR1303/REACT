@@ -28,11 +28,27 @@ const menuData = {
 const Menu = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("All");
+  const [cartItems, setCartItems] = useState({});
   const dispatch = useDispatch();
 
-  const handleAddToCart = (item) => {
-    dispatch(addToCart(item));
-    alert(`${item.name} added to cart!`);
+  const handleUpdateCart = (item, action) => {
+    setCartItems((prev) => {
+      const updated = { ...prev };
+      if (action === "add") {
+        updated[item.name] = { ...item, quantity: 1 };
+        dispatch(addToCart(item));
+      } else if (action === "increase") {
+        updated[item.name].quantity += 1;
+        dispatch(addToCart(item));
+      } else if (action === "decrease") {
+        if (updated[item.name].quantity > 1) {
+          updated[item.name].quantity -= 1;
+        } else {
+          delete updated[item.name];
+        }
+      }
+      return updated;
+    });
   };
 
   const filteredMenu = Object.entries(menuData).reduce((acc, [category, items]) => {
@@ -84,20 +100,45 @@ const Menu = () => {
             <div key={category} className="menu-section">
               <h2 className="category-title">{category}</h2>
               <div className="menu-grid">
-                {items.map((item, idx) => (
-                  <div className="menu-card" key={idx}>
-                    <img src={item.img} alt={item.name} className="menu-img" />
-                    <h3>{item.name}</h3>
-                    <p>{item.description}</p>
-                    <span className="menu-price">₹ {item.price}</span>
-                    <button
-                      className="add-to-cart-btn"
-                      onClick={() => handleAddToCart(item)}
-                    >
-                      Add to Cart
-                    </button>
-                  </div>
-                ))}
+                {items.map((item, idx) => {
+                  const quantity = cartItems[item.name]?.quantity || 0;
+                  return (
+                    <div className="menu-card" key={idx}>
+                      <img src={item.img} alt={item.name} className="menu-img" />
+                      <h3>{item.name}</h3>
+                      <p>{item.description}</p>
+                      <span className="menu-price">₹ {item.price}</span>
+                      
+                      {/* Quantity Control */}
+                      <div className="quantity-control">
+                        {quantity > 0 ? (
+                          <div className="quantity-stepper">
+                            <button
+                              className="qty-btn"
+                              onClick={() => handleUpdateCart(item, "decrease")}
+                            >
+                              -
+                            </button>
+                            <span className="qty-count">{quantity}</span>
+                            <button
+                              className="qty-btn"
+                              onClick={() => handleUpdateCart(item, "increase")}
+                            >
+                              +
+                            </button>
+                          </div>
+                        ) : (
+                          <button
+                            className="add-to-cart-btn"
+                            onClick={() => handleUpdateCart(item, "add")}
+                          >
+                            Add
+                          </button>
+                        )}
+                      </div>
+                    </div>
+                  );
+                })}
               </div>
             </div>
           ))
