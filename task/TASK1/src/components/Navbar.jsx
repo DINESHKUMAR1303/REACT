@@ -1,29 +1,38 @@
-import React from "react";
-import { NavLink } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+import { useSelector } from "react-redux";
 
-const Navbar = () => {
+
+function Navbar() {
+  const cartItems = useSelector((state) => state.cart.items);
+  const location = useLocation(); 
+
   return (
     <nav className="navbar">
       <div className="logo">🍽 Foodie</div>
       <ul className="nav-links">
         <li>
-          <NavLink to="/" end className={({ isActive }) => (isActive ? "active" : "")}>
+          <Link className={location.pathname === "/" ? "active" : ""} to="/">
             Home
-          </NavLink>
+          </Link>
         </li>
         <li>
-          <NavLink to="/menu" className={({ isActive }) => (isActive ? "active" : "")}>
+          <Link className={location.pathname === "/menu" ? "active" : ""} to="/menu">
             Menu
-          </NavLink>
+          </Link>
         </li>
         <li>
-          <NavLink to="/contact" className={({ isActive }) => (isActive ? "active" : "")}>
+          <Link className={location.pathname === "/contact" ? "active" : ""} to="/contact">
             Contact
-          </NavLink>
+          </Link>
+        </li>
+        <li>
+          <Link className={location.pathname === "/cart" ? "active" : ""} to="/cart">
+            🛒 ({cartItems.length})
+          </Link>
         </li>
       </ul>
     </nav>
   );
-};
+}
 
 export default Navbar;

@@ -1,100 +1,48 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { addToCart } from "../redux/cartslice";
 
 const menuData = {
   Pizza: [
-    {
-      name: "Margherita Pizza",
-      description: "Classic delight with fresh tomatoes and basil",
-      price: "₹ 250",
-      img: "/images/Margheritapizza.jpg"
-    },
-    {
-      name: "Pepperoni Pizza",
-      description: "Loaded with spicy pepperoni & cheese",
-      price: "₹ 350",
-      img: "/images/Pepperonipizza.jpg"
-    },
-    {
-      name: "BBQ Chicken Pizza",
-      description: "Smoky BBQ chicken with extra cheese",
-      price: "₹ 400",
-      img: "/images/bbqpizza.webp"
-    }
+    { name: "Margherita Pizza", description: "Classic delight with fresh tomatoes and basil", price: 250, img: "/images/Margheritapizza.jpg" },
+    { name: "Pepperoni Pizza", description: "Loaded with spicy pepperoni & cheese", price: 350, img: "/images/Pepperonipizza.jpg" },
+    { name: "BBQ Chicken Pizza", description: "Smoky BBQ chicken with extra cheese", price: 400, img: "/images/bbqpizza.webp" }
   ],
-
   Burger: [
-    {
-      name: "Cheese Burger",
-      description: "Juicy beef patty with melted cheese",
-      price: "₹ 180",
-      img: "/images/cheeseburger.jpg"
-    },
-    {
-      name: "Veggie Burger",
-      description: "Crispy veggie patty with fresh veggies",
-      price: "₹ 150",
-      img: "/images/veggieburger.jpg"
-    },
-    {
-      name: "Chicken Burger",
-      description: "Grilled chicken patty with spicy mayo",
-      price: "₹ 200",
-      img: "/images/chickenburger.jpg"
-    }
+    { name: "Cheese Burger", description: "Juicy beef patty with melted cheese", price: 180, img: "/images/cheeseburger.jpg" },
+    { name: "Veggie Burger", description: "Crispy veggie patty with fresh veggies", price: 150, img: "/images/veggieburger.jpg" },
+    { name: "Chicken Burger", description: "Grilled chicken patty with spicy mayo", price: 200, img: "/images/chickenburger.jpg" }
   ],
-
   Pasta: [
-    {
-      name: "White Sauce Pasta",
-      description: "Creamy Alfredo pasta with herbs",
-      price: "₹ 220",
-      img: "/images/whitepasta.png"
-    },
-    {
-      name: "Red Sauce Pasta",
-      description: "Tangy tomato sauce with Italian spices",
-      price: "₹ 200",
-      img: "/images/redpasta.png"
-    },
-    {
-      name: "Pesto Pasta",
-      description: "Green pesto with parmesan cheese",
-      price: "₹ 240",
-      img: "/images/pestopasta.jpg"
-    }
+    { name: "White Sauce Pasta", description: "Creamy Alfredo pasta with herbs", price: 220, img: "/images/whitepasta.png" },
+    { name: "Red Sauce Pasta", description: "Tangy tomato sauce with Italian spices", price: 200, img: "/images/redpasta.png" },
+    { name: "Pesto Pasta", description: "Green pesto with parmesan cheese", price: 240, img: "/images/pestopasta.jpg" }
   ],
-
   Salad: [
-    {
-      name: "Caesar Salad",
-      description: "Crisp lettuce, parmesan, and croutons",
-      price: "₹ 120",
-      img: "/images/caesarsalad.jpg"
-    },
-    {
-      name: "Greek Salad",
-      description: "Fresh veggies with feta cheese",
-      price: "₹ 140",
-      img: "/images/Greeksalad.webp"
-    },
-    {
-      name: "Fruit Salad",
-      description: "Fresh seasonal fruits with honey drizzle",
-      price: "₹ 160",
-      img: "/images/fruitsalad.jpg"
-    }
+    { name: "Caesar Salad", description: "Crisp lettuce, parmesan, and croutons", price: 120, img: "/images/caesarsalad.jpg" },
+    { name: "Greek Salad", description: "Fresh veggies with feta cheese", price: 140, img: "/images/Greeksalad.webp" },
+    { name: "Fruit Salad", description: "Fresh seasonal fruits with honey drizzle", price: 160, img: "/images/fruitsalad.jpg" }
   ]
 };
 
 const Menu = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("All");
+  const dispatch = useDispatch();
 
-  const filterItems = (items) => {
-    return items.filter(item =>
+  const handleAddToCart = (item) => {
+    dispatch(addToCart(item));
+    alert(`${item.name} added to cart!`);
+  };
+
+  const filteredMenu = Object.entries(menuData).reduce((acc, [category, items]) => {
+    if (selectedCategory !== "All" && selectedCategory !== category) return acc;
+    const filteredItems = items.filter(item =>
       item.name.toLowerCase().includes(searchTerm.toLowerCase())
     );
-  };
+    if (filteredItems.length) acc.push({ category, items: filteredItems });
+    return acc;
+  }, []);
 
   return (
     <div className="menu-page">
@@ -104,7 +52,7 @@ const Menu = () => {
         <p>Choose your favorite and enjoy the taste of perfection!</p>
       </div>
 
-      {/* Search & Category Filters */}
+      {/* Search & Filters */}
       <div className="menu-controls">
         <input
           type="text"
@@ -127,32 +75,33 @@ const Menu = () => {
         </div>
       </div>
 
-      {/* Menu by Category */}
+      {/* Menu Items */}
       <div className="menu-categories">
-        {Object.entries(menuData).map(([category, items]) => {
-          if (selectedCategory !== "All" && selectedCategory !== category) {
-            return null; // Skip categories that are not selected
-          }
-
-          const filtered = filterItems(items);
-          if (filtered.length === 0) return null; // Skip empty sections
-
-          return (
+        {filteredMenu.length === 0 ? (
+          <p className="no-items">No items found.</p>
+        ) : (
+          filteredMenu.map(({ category, items }) => (
             <div key={category} className="menu-section">
               <h2 className="category-title">{category}</h2>
               <div className="menu-grid">
-                {filtered.map((item, idx) => (
+                {items.map((item, idx) => (
                   <div className="menu-card" key={idx}>
                     <img src={item.img} alt={item.name} className="menu-img" />
                     <h3>{item.name}</h3>
                     <p>{item.description}</p>
-                    <span className="menu-price">{item.price}</span>
+                    <span className="menu-price">₹ {item.price}</span>
+                    <button
+                      className="add-to-cart-btn"
+                      onClick={() => handleAddToCart(item)}
+                    >
+                      Add to Cart
+                    </button>
                   </div>
                 ))}
               </div>
             </div>
-          );
-        })}
+          ))
+        )}
       </div>
     </div>
   );

@@ -7,8 +7,9 @@ import Pizza from "./components/Pizza";
 import Burger from "./components/Burger";
 import Pasta from "./components/Pasta";
 import Salad from "./components/Salad";
+import Cart from "./components/Cart";  // 
 import Footer from "./components/Footer";
-import "./App.css"; 
+import "./App.css";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
             <Route path="salad" element={<Salad />} />
           </Route>
           <Route path="/contact" element={<Contact />} />
+          <Route path="/cart" element={<Cart />} /> 
         </Routes>
       </div>
       <Footer />
