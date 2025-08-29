@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 
 function Navbar() {
   const cartItems = useSelector((state) => state.cart.items);
-  const location = useLocation();
+  const location = useLocation(); 
 
   return (
     <nav className="navbar">
@@ -27,7 +27,7 @@ function Navbar() {
         </li>
         <li>
           <Link className={location.pathname === "/cart" ? "active" : ""} to="/cart">
-            🛒 <span className="cart-count">{cartItems.length}</span>
+            🛒 ({cartItems.length})
           </Link>
         </li>
       </ul>
