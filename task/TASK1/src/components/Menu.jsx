@@ -109,7 +109,7 @@ const Menu = () => {
                       <p>{item.description}</p>
                       <span className="menu-price">₹ {item.price}</span>
                       
-                      {/* ✅ Quantity Control */}
+                      {/*  Quantity Control */}
                       <div className="quantity-control">
                         {quantity > 0 ? (
                           <div className="quantity-stepper">
