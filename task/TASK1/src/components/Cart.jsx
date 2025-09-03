@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { removeFromCart, increaseQty, decreaseQty } from "../redux/cartslice";
-
+import { useNavigate } from "react-router-dom"; // ✅ Import navigation
 
 const Cart = () => {
   const cartItems = useSelector((state) => state.cart.items);
   const dispatch = useDispatch();
+  const navigate = useNavigate(); // ✅ Initialize navigation
 
   const [suggestion, setSuggestion] = useState("");
 
@@ -16,6 +17,10 @@ const Cart = () => {
   const deliveryFee = 93;
   const gst = 22.8;
   const totalPay = itemTotal + deliveryFee + gst;
+
+  const handleCheckout = () => {
+    navigate("/login"); // ✅ Redirect to Login page
+  };
 
   return (
     <div className="cart-container">
@@ -99,7 +104,9 @@ const Cart = () => {
       </div>
 
       {/* Checkout Button */}
-      <button className="checkout-btn">Proceed to Checkout</button>
+      <button className="checkout-btn" onClick={handleCheckout}>
+        Proceed to Checkout
+      </button>
     </div>
   );
 };

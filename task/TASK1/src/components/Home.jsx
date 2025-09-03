@@ -28,28 +28,43 @@ const Home = () => {
 
   return (
     <div className="home-wrapper">
-      <div className="hero-overlay"></div>
 
-      {/* Hero Section */}
-      <section className="hero-content">
-        <h1>
-          Taste the <span>Best</span> Food in Town
-        </h1>
-        <p>
-          Fresh ingredients, delicious flavors, and quick delivery – all at your fingertips.
-        </p>
-        <div className="hero-buttons">
-          <button className="btn primary-btn">Order Now</button>
-          <button
-            className="btn secondary-btn"
-            onClick={() => navigate("/menu")}
-          >
-            View Menu
-          </button>
+      {/* ✅ Hero Section */}
+      <section className="hero-section">
+        <div className="hero-overlay"></div>
+        <div className="hero-content">
+          <h1>
+            Taste the <span>Best</span> Food in Town
+          </h1>
+          <p>
+            Fresh ingredients, delicious flavors, and quick delivery – all at your fingertips.
+          </p>
+          <div className="hero-buttons">
+            <button className="btn primary-btn">Order Now</button>
+            <button className="btn secondary-btn" onClick={() => navigate("/menu")}>
+              View Menu
+            </button>
+          </div>
         </div>
       </section>
 
-      {/* Popular Foods */}
+      {/* ✅ Features Section */}
+      <section className="features-section">
+        <div className="feature">
+          <h3>🚀 Fast Delivery</h3>
+          <p>Your favorite meals delivered in under 30 minutes.</p>
+        </div>
+        <div className="feature">
+          <h3>🥗 Fresh Ingredients</h3>
+          <p>Only the best and freshest ingredients for every dish.</p>
+        </div>
+        <div className="feature">
+          <h3>⭐ Premium Quality</h3>
+          <p>Handcrafted recipes made with love by top chefs.</p>
+        </div>
+      </section>
+
+      {/* ✅ Popular Foods Section */}
       <section className="popular-foods">
         <h2>Popular Foods</h2>
         <Slider {...settings} className="food-slider">
@@ -74,6 +89,43 @@ const Home = () => {
             <p>Healthy and refreshing choice.</p>
           </div>
         </Slider>
+      </section>
+
+      {/* ✅ Special Offer Section */}
+      <section className="special-offer">
+        <h2>🔥 Special Offer</h2>
+        <p>
+          Get <span>20% OFF</span> on your first order! Use code <b>FOODIE20</b>.
+        </p>
+        <button className="btn primary-btn">Claim Offer</button>
+      </section>
+
+      {/* ✅ Testimonials */}
+      <section className="testimonials">
+        <h2>What Our Customers Say</h2>
+        <div className="testimonial-cards">
+          <div className="testimonial">
+            <p>"Absolutely the best pizza I’ve had in years. Fast delivery too!"</p>
+            <h4>- Priya</h4>
+          </div>
+          <div className="testimonial">
+            <p>"The burgers are juicy and the pasta is heavenly. Highly recommend!"</p>
+            <h4>- Arjun</h4>
+          </div>
+          <div className="testimonial">
+            <p>"Fresh, tasty, and quick. This is my go-to food app."</p>
+            <h4>- Sneha</h4>
+          </div>
+        </div>
+      </section>
+
+      {/* ✅ Call to Action */}
+      <section className="cta-banner">
+        <h2>Ready to Taste Happiness?</h2>
+        <p>Order now and enjoy the premium dining experience at home.</p>
+        <button className="btn primary-btn" onClick={() => navigate("/menu")}>
+          Explore Menu
+        </button>
       </section>
     </div>
   );

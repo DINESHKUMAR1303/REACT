@@ -12,6 +12,12 @@ function Navbar() {
     setIsOpen(!isOpen);
   };
 
+  // ✅ Calculate total quantity instead of just unique items
+  const totalCartQuantity = cartItems.reduce(
+    (total, item) => total + item.quantity,
+    0
+  );
+
   return (
     <nav className="navbar">
       <div className="logo">🍽 Foodie</div>
@@ -56,7 +62,7 @@ function Navbar() {
             to="/cart"
             onClick={() => setIsOpen(false)}
           >
-            🛒 ({cartItems.length})
+            🛒 ({totalCartQuantity})
           </Link>
         </li>
       </ul>

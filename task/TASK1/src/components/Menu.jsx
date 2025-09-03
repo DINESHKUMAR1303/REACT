@@ -1,35 +1,21 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../redux/cartslice";
 
-const menuData = {
-  Pizza: [
-    { id: 1, name: "Margherita Pizza", description: "Classic delight with fresh tomatoes and basil", price: 250, img: "/images/Margheritapizza.jpg" },
-    { id: 2, name: "Pepperoni Pizza", description: "Loaded with spicy pepperoni & cheese", price: 350, img: "/images/Pepperonipizza.jpg" },
-    { id: 3, name: "BBQ Chicken Pizza", description: "Smoky BBQ chicken with extra cheese", price: 400, img: "/images/bbqpizza.webp" }
-  ],
-  Burger: [
-    { id: 4, name: "Cheese Burger", description: "Juicy beef patty with melted cheese", price: 180, img: "/images/cheeseburger.jpg" },
-    { id: 5, name: "Veggie Burger", description: "Crispy veggie patty with fresh veggies", price: 150, img: "/images/veggieburger.jpg" },
-    { id: 6, name: "Chicken Burger", description: "Grilled chicken patty with spicy mayo", price: 200, img: "/images/chickenburger.jpg" }
-  ],
-  Pasta: [
-    { id: 7, name: "White Sauce Pasta", description: "Creamy Alfredo pasta with herbs", price: 220, img: "/images/whitepasta.png" },
-    { id: 8, name: "Red Sauce Pasta", description: "Tangy tomato sauce with Italian spices", price: 200, img: "/images/redpasta.png" },
-    { id: 9, name: "Pesto Pasta", description: "Green pesto with parmesan cheese", price: 240, img: "/images/pestopasta.jpg" }
-  ],
-  Salad: [
-    { id: 10, name: "Caesar Salad", description: "Crisp lettuce, parmesan, and croutons", price: 120, img: "/images/caesarsalad.jpg" },
-    { id: 11, name: "Greek Salad", description: "Fresh veggies with feta cheese", price: 140, img: "/images/Greeksalad.webp" },
-    { id: 12, name: "Fruit Salad", description: "Fresh seasonal fruits with honey drizzle", price: 160, img: "/images/fruitsalad.jpg" }
-  ]
-};
-
 const Menu = () => {
+  const [menuData, setMenuData] = useState({});
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [cartItems, setCartItems] = useState({});
   const dispatch = useDispatch();
+
+ 
+  useEffect(() => {
+    fetch("/menu.json")
+      .then((res) => res.json())
+      .then((data) => setMenuData(data))
+      .catch((err) => console.error("Error loading menu:", err));
+  }, []);
 
   const handleUpdateCart = (item, action) => {
     setCartItems((prev) => {

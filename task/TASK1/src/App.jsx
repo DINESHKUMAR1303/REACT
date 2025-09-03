@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Home from "./components/Home";
 import Menu from "./components/Menu";
@@ -7,14 +7,21 @@ import Pizza from "./components/Pizza";
 import Burger from "./components/Burger";
 import Pasta from "./components/Pasta";
 import Salad from "./components/Salad";
-import Cart from "./components/Cart";  // 
+import Cart from "./components/Cart";
 import Footer from "./components/Footer";
+import Login from "./components/Login";
+import Signup from "./components/Signup";
 import "./App.css";
 
 function App() {
+  const location = useLocation();
+
+  const hideNavbarFooter = ["/login", "/signup"].includes(location.pathname);
+
   return (
     <div className="app-container">
-      <Navbar />
+      {!hideNavbarFooter && <Navbar />}
+
       <div className="main-content">
         <Routes>
           <Route path="/" element={<Home />} />
@@ -25,10 +32,13 @@ function App() {
             <Route path="salad" element={<Salad />} />
           </Route>
           <Route path="/contact" element={<Contact />} />
-          <Route path="/cart" element={<Cart />} /> 
+          <Route path="/cart" element={<Cart />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
         </Routes>
       </div>
-      <Footer />
+
+      {!hideNavbarFooter && <Footer />}
     </div>
   );
 }
