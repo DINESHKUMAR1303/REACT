@@ -11,6 +11,7 @@ import Cart from "./components/Cart";
 import Footer from "./components/Footer";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
+import UsingFetch from "./components/UsingFetch";   // ✅ added
 import "./App.css";
 
 function App() {
@@ -35,6 +36,9 @@ function App() {
           <Route path="/cart" element={<Cart />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
+
+          {/* ✅ New API fetch page */}
+          <Route path="/fetch" element={<UsingFetch />} /> 
         </Routes>
       </div>
 

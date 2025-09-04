@@ -10,7 +10,7 @@ function Login() {
   const handleLogin = (e) => {
     e.preventDefault();
 
-    // Simple check
+   
     const storedEmail = localStorage.getItem("userEmail");
     const storedPassword = localStorage.getItem("userPassword");
 

@@ -29,7 +29,7 @@ const Home = () => {
   return (
     <div className="home-wrapper">
 
-      {/* ✅ Hero Section */}
+      {/*  Hero Section */}
       <section className="hero-section">
         <div className="hero-overlay"></div>
         <div className="hero-content">
@@ -48,7 +48,7 @@ const Home = () => {
         </div>
       </section>
 
-      {/* ✅ Features Section */}
+      {/*  Features Section */}
       <section className="features-section">
         <div className="feature">
           <h3>🚀 Fast Delivery</h3>
@@ -64,7 +64,7 @@ const Home = () => {
         </div>
       </section>
 
-      {/* ✅ Popular Foods Section */}
+      {/*  Popular Foods Section */}
       <section className="popular-foods">
         <h2>Popular Foods</h2>
         <Slider {...settings} className="food-slider">
@@ -91,7 +91,7 @@ const Home = () => {
         </Slider>
       </section>
 
-      {/* ✅ Special Offer Section */}
+      {/*  Special Offer Section */}
       <section className="special-offer">
         <h2>🔥 Special Offer</h2>
         <p>

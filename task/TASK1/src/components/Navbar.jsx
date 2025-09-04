@@ -12,7 +12,7 @@ function Navbar() {
     setIsOpen(!isOpen);
   };
 
-  // ✅ Calculate total quantity instead of just unique items
+
   const totalCartQuantity = cartItems.reduce(
     (total, item) => total + item.quantity,
     0
@@ -22,12 +22,12 @@ function Navbar() {
     <nav className="navbar">
       <div className="logo">🍽 Foodie</div>
 
-      {/* Toggle Icon for Mobile */}
+      
       <div className="menu-toggle" onClick={toggleMenu}>
         {isOpen ? <FaTimes /> : <FaBars />}
       </div>
 
-      {/* Nav Links */}
+     
       <ul className={`nav-links ${isOpen ? "active" : ""}`}>
         <li>
           <Link
@@ -56,6 +56,18 @@ function Navbar() {
             Contact
           </Link>
         </li>
+
+       
+        <li>
+          <Link
+            className={location.pathname === "/fetch" ? "active" : ""}
+            to="/fetch"
+            onClick={() => setIsOpen(false)}
+          >
+            API Demo
+          </Link>
+        </li>
+
         <li>
           <Link
             className={location.pathname === "/cart" ? "active" : ""}

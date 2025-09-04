@@ -48,13 +48,13 @@ const Menu = () => {
 
   return (
     <div className="menu-page">
-      {/* ✅ Header */}
+      {/* Header */}
       <div className="menu-header">
         <h1>🍽 Our Delicious Menu</h1>
         <p>Choose your favorite and enjoy the taste of perfection!</p>
       </div>
 
-      {/* ✅ Search & Filters */}
+      {/*  Search & Filters */}
       <div className="menu-controls">
         <input
           type="text"
@@ -77,7 +77,7 @@ const Menu = () => {
         </div>
       </div>
 
-      {/* ✅ Menu Items */}
+      {/*  Menu Items */}
       <div className="menu-categories">
         {filteredMenu.length === 0 ? (
           <p className="no-items">No items found.</p>
