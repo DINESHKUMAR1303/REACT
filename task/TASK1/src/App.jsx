@@ -11,7 +11,7 @@ import Cart from "./components/Cart";
 import Footer from "./components/Footer";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
-import UsingFetch from "./components/UsingFetch";   
+// import UsingFetch from "./components/UsingFetch";   
 import "./App.css";
 
 function App() {
@@ -38,7 +38,7 @@ function App() {
           <Route path="/signup" element={<Signup />} />
 
          
-          <Route path="/fetch" element={<UsingFetch />} /> 
+          {/* <Route path="/fetch" element={<UsingFetch />} />  */}
         </Routes>
       </div>
 

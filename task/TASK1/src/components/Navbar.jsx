@@ -57,7 +57,7 @@ function Navbar() {
           </Link>
         </li>
 
-       
+{/*        
         <li>
           <Link
             className={location.pathname === "/fetch" ? "active" : ""}
@@ -66,7 +66,7 @@ function Navbar() {
           >
             API Demo
           </Link>
-        </li>
+        </li> */}
 
         <li>
           <Link

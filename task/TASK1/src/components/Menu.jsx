@@ -9,7 +9,6 @@ const Menu = () => {
   const [cartItems, setCartItems] = useState({});
   const dispatch = useDispatch();
 
- 
   useEffect(() => {
     fetch("/menu.json")
       .then((res) => res.json())
@@ -39,7 +38,7 @@ const Menu = () => {
 
   const filteredMenu = Object.entries(menuData).reduce((acc, [category, items]) => {
     if (selectedCategory !== "All" && selectedCategory !== category) return acc;
-    const filteredItems = items.filter(item =>
+    const filteredItems = items.filter((item) =>
       item.name.toLowerCase().includes(searchTerm.toLowerCase())
     );
     if (filteredItems.length) acc.push({ category, items: filteredItems });
@@ -54,7 +53,7 @@ const Menu = () => {
         <p>Choose your favorite and enjoy the taste of perfection!</p>
       </div>
 
-      {/*  Search & Filters */}
+      {/* Search & Filters */}
       <div className="menu-controls">
         <input
           type="text"
@@ -65,8 +64,9 @@ const Menu = () => {
         />
 
         <div className="category-buttons">
-          {["All", "Pizza", "Burger", "Pasta", "Salad"].map(cat => (
+          {["All", "Pizza", "Burger", "Pasta", "Salad"].map((cat) => (
             <button
+              type="button"
               key={cat}
               className={`filter-btn ${selectedCategory === cat ? "active" : ""}`}
               onClick={() => setSelectedCategory(cat)}
@@ -77,7 +77,7 @@ const Menu = () => {
         </div>
       </div>
 
-      {/*  Menu Items */}
+      {/* Menu Items */}
       <div className="menu-categories">
         {filteredMenu.length === 0 ? (
           <p className="no-items">No items found.</p>
@@ -94,12 +94,13 @@ const Menu = () => {
                       <h3>{item.name}</h3>
                       <p>{item.description}</p>
                       <span className="menu-price">₹ {item.price}</span>
-                      
-                      {/*  Quantity Control */}
+
+                      {/* Quantity Control */}
                       <div className="quantity-control">
                         {quantity > 0 ? (
                           <div className="quantity-stepper">
                             <button
+                              type="button"
                               className="qty-btn"
                               onClick={() => handleUpdateCart(item, "decrease")}
                             >
@@ -107,6 +108,7 @@ const Menu = () => {
                             </button>
                             <span className="qty-count">{quantity}</span>
                             <button
+                              type="button"
                               className="qty-btn"
                               onClick={() => handleUpdateCart(item, "increase")}
                             >
@@ -115,6 +117,7 @@ const Menu = () => {
                           </div>
                         ) : (
                           <button
+                            type="button"
                             className="add-to-cart-btn"
                             onClick={() => handleUpdateCart(item, "add")}
                           >
