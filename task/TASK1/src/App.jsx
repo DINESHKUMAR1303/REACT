@@ -11,7 +11,7 @@ import Cart from "./components/Cart";
 import Footer from "./components/Footer";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
-import UsingFetch from "./components/UsingFetch";   // ✅ added
+import UsingFetch from "./components/UsingFetch";   
 import "./App.css";
 
 function App() {
@@ -27,17 +27,17 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/menu" element={<Menu />}>
-            <Route path="pizza" element={<Pizza />} />
             <Route path="burger" element={<Burger />} />
             <Route path="pasta" element={<Pasta />} />
             <Route path="salad" element={<Salad />} />
+            <Route path="pizza" element={<Pizza />} />
           </Route>
           <Route path="/contact" element={<Contact />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
 
-          {/* ✅ New API fetch page */}
+         
           <Route path="/fetch" element={<UsingFetch />} /> 
         </Routes>
       </div>

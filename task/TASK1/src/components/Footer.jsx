@@ -29,7 +29,7 @@ const Footer = () => {
           <h3>Contact Us</h3>
           <p>Email: <a href="mailto:support@foodie.com">support@foodie.com</a></p>
           <p>Phone: <a href="tel:+919876543210">+91 98765 43210</a></p>
-          <p>Address: 123 Foodie Street, Chennai, India</p>
+          <p>Address: 123 Foodie Street, Chennai, India</p>     
         </div>
 
         {/* Social Media */}
