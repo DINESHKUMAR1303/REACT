@@ -1,10 +1,9 @@
 const http = require('http');
 const fs = require('fs');
 const path = require('path');
+const urlModule = require('url');
 
 const PORT = 2831;
-
-// Path to JSON file
 const filePath = path.join(__dirname, 'data.json');
 
 // =============================
@@ -12,7 +11,7 @@ const filePath = path.join(__dirname, 'data.json');
 // =============================
 function readData() {
   if (!fs.existsSync(filePath)) {
-    fs.writeFileSync(filePath, JSON.stringify([], null, 2)); // create if not exist
+    fs.writeFileSync(filePath, JSON.stringify([], null, 2));
   }
   const data = fs.readFileSync(filePath, 'utf8');
   return JSON.parse(data || '[]');
@@ -22,93 +21,70 @@ function writeData(data) {
   fs.writeFileSync(filePath, JSON.stringify(data, null, 2));
 }
 
-function parseBody(req) {
-  return new Promise((resolve, reject) => {
-    let body = '';
-    req.on('data', chunk => (body += chunk.toString()));
-    req.on('end', () => {
-      try {
-        resolve(JSON.parse(body || '{}'));
-      } catch (err) {
-        reject(err);
-      }
-    });
-    req.on('error', reject);
-  });
-}
-
 // =============================
 // HTTP Server
 // =============================
-const server = http.createServer(async (req, res) => {
-  const url = req.url;
-  const method = req.method;
+const server = http.createServer((req, res) => {
+  const parsedUrl = urlModule.parse(req.url, true); // parse query params
+  const pathname = parsedUrl.pathname;
+  const query = parsedUrl.query;
 
   // Home
-  if (url === '/' && method === 'GET') {
+  if (pathname === '/' && req.method === 'GET') {
     res.writeHead(200, { 'Content-Type': 'text/plain' });
     return res.end('Welcome to Backend Page with JSON FS!');
   }
 
-  // GET all data
-  if (url === '/users' && method === 'GET') {
+  // Read all users
+  if (pathname === '/read' && req.method === 'GET') {
     const data = readData();
     res.writeHead(200, { 'Content-Type': 'application/json' });
     return res.end(JSON.stringify(data));
   }
 
-  // GET data by ID
-  if (url.startsWith('/users/') && method === 'GET') {
-    const id = parseInt(url.split('/')[2]);
+  // Read single user by ID
+  if (pathname.startsWith('/read/') && req.method === 'GET') {
+    const id = parseInt(pathname.split('/')[2]);
     const data = readData();
-    const item = data.find(u => u.id === id);
-    if (item) {
+    const user = data.find(u => u.id === id);
+    if (user) {
       res.writeHead(200, { 'Content-Type': 'application/json' });
-      return res.end(JSON.stringify(item));
+      return res.end(JSON.stringify(user));
     } else {
       res.writeHead(404, { 'Content-Type': 'text/plain' });
       return res.end('User not found');
     }
   }
 
-  // POST → Append (add new item)
-  if (url === '/users' && method === 'POST') {
-    try {
-      const body = await parseBody(req);
-      const data = readData();
-      const newItem = { id: data.length + 1, ...body };
-      data.push(newItem);
-      writeData(data);
-      res.writeHead(201, { 'Content-Type': 'application/json' });
-      return res.end(JSON.stringify(newItem));
-    } catch (err) {
+  // Write new user via query params
+  // Example: /write?id=1&name=Dinesh&age=25
+  if (pathname === '/write' && req.method === 'GET') {
+    const id = query.id ? parseInt(query.id) : null;
+    const name = query.name;
+    const age = query.age ? parseInt(query.age) : null;
+
+    if (!id || !name || !age) {
       res.writeHead(400, { 'Content-Type': 'text/plain' });
-      return res.end('Invalid JSON');
+      return res.end('Missing or invalid parameters');
     }
+
+    const data = readData();
+
+    // Check if ID already exists
+    if (data.find(u => u.id === id)) {
+      res.writeHead(400, { 'Content-Type': 'text/plain' });
+      return res.end('ID already exists');
+    }
+
+    const newUser = { id, name, age };
+    data.push(newUser);
+    writeData(data);
+
+    res.writeHead(200, { 'Content-Type': 'text/plain' });
+    return res.end('Successfully written');
   }
 
-  // PUT → Update
-  if (url.startsWith('/users/') && method === 'PUT') {
-    try {
-      const id = parseInt(url.split('/')[2]);
-      const data = readData();
-      const item = data.find(u => u.id === id);
-      if (!item) {
-        res.writeHead(404, { 'Content-Type': 'text/plain' });
-        return res.end('User not found');
-      }
-      const body = await parseBody(req);
-      Object.assign(item, body);
-      writeData(data);
-      res.writeHead(200, { 'Content-Type': 'application/json' });
-      return res.end(JSON.stringify(item));
-    } catch (err) {
-      res.writeHead(400, { 'Content-Type': 'text/plain' });
-      return res.end('Invalid JSON');
-    }
-  }
-
-  // Not found
+  // Route not found
   res.writeHead(404, { 'Content-Type': 'text/plain' });
   res.end('Route not found');
 });
@@ -117,5 +93,5 @@ const server = http.createServer(async (req, res) => {
 // Start Server
 // =============================
 server.listen(PORT, () => {
-  console.log(`🚀 Server running at http://localhost:${PORT}`);
+  console.log(`Server running at http://localhost:${PORT}`);
 });
