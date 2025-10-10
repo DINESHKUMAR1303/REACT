@@ -1,14 +1,11 @@
 const http = require('http');
 const fs = require('fs');
 const path = require('path');
-const urlModule = require('url');
 
 const PORT = 2831;
 const filePath = path.join(__dirname, 'data.json');
 
-// =============================
-// Helper Functions
-// =============================
+// ===== Helper Functions =====
 function readData() {
   if (!fs.existsSync(filePath)) fs.writeFileSync(filePath, JSON.stringify([], null, 2));
   const data = fs.readFileSync(filePath, 'utf8');
@@ -19,240 +16,214 @@ function writeData(data) {
   fs.writeFileSync(filePath, JSON.stringify(data, null, 2));
 }
 
-// =============================
-// HTML Template for Menu
-// =============================
-function renderMenu() {
-  return `
-  <!DOCTYPE html>
-  <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <title>CRUD Menu</title>
-    <style>
-      body {
-        font-family: Arial, sans-serif;
-        background: #f7f8fa;
-        padding: 40px;
-        text-align: center;
-        color: #333;
-      }
-      h1 {
-        color: #444;
-      }
-      .menu {
-        background: #fff;
-        padding: 25px;
-        border-radius: 12px;
-        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-        display: inline-block;
-        width: 400px;
-        text-align: left;
-      }
-      .section {
-        margin-bottom: 25px;
-      }
-      label {
-        display: block;
-        margin: 8px 0 5px;
-        font-weight: bold;
-      }
-      input {
-        width: 100%;
-        padding: 8px;
-        border: 1px solid #ccc;
-        border-radius: 6px;
-      }
-      button {
-        background: #007bff;
-        border: none;
-        color: white;
-        padding: 8px 14px;
-        margin-top: 10px;
-        border-radius: 6px;
-        cursor: pointer;
-        font-size: 14px;
-      }
-      button:hover {
-        background: #0056b3;
-      }
-      pre {
-        text-align: left;
-        background: #eee;
-        padding: 10px;
-        border-radius: 6px;
-        font-size: 14px;
-        max-height: 200px;
-        overflow-y: auto;
-      }
-      hr {
-        margin: 25px 0;
-      }
-    </style>
-  </head>
-  <body>
-    <h1>📋 JSON CRUD Menu</h1>
-    <div class="menu">
-      <div class="section">
-        <h3>👥 Read All Users</h3>
-        <button onclick="readAll()">Read</button>
-        <pre id="all"></pre>
-      </div>
-      <hr>
-      <div class="section">
-        <h3>🔍 Read User by ID</h3>
-        <label>ID:</label>
-        <input type="number" id="readId" />
-        <button onclick="readById()">Read User</button>
-        <pre id="single"></pre>
-      </div>
-      <hr>
-      <div class="section">
-        <h3>➕ Add New User</h3>
-        <label>ID:</label><input type="number" id="addId" />
-        <label>Name:</label><input type="text" id="addName" />
-        <label>Age:</label><input type="number" id="addAge" />
-        <button onclick="addUser()">Add User</button>
-        <p id="addMsg"></p>
-      </div>
-      <hr>
-      <div class="section">
-        <h3>❌ Delete User</h3>
-        <label>ID:</label>
-        <input type="number" id="deleteId" />
-        <button onclick="deleteUser()">Delete</button>
-        <p id="deleteMsg"></p>
-      </div>
-    </div>
+// ===== Server =====
+const server = http.createServer(async (req, res) => {
+  const { url, method } = req;
 
-    <script>
-      async function readAll() {
-        const res = await fetch('/read');
-        const data = await res.json();
-        document.getElementById('all').innerText = JSON.stringify(data, null, 2);
-      }
-
-      async function readById() {
-        const id = document.getElementById('readId').value;
-        if (!id) return alert('Please enter an ID');
-        const res = await fetch('/read/' + id);
-        if (res.ok) {
-          const data = await res.json();
-          document.getElementById('single').innerText = JSON.stringify(data, null, 2);
-        } else {
-          document.getElementById('single').innerText = 'User not found';
-        }
-      }
-
-      async function addUser() {
-        const id = document.getElementById('addId').value;
-        const name = document.getElementById('addName').value;
-        const age = document.getElementById('addAge').value;
-        if (!id || !name || !age) return alert('All fields are required!');
-        const res = await fetch('/write?id=' + id + '&name=' + name + '&age=' + age);
-        document.getElementById('addMsg').innerText = await res.text();
-      }
-
-      async function deleteUser() {
-        const id = document.getElementById('deleteId').value;
-        if (!id) return alert('Please enter an ID');
-        const res = await fetch('/delete?id=' + id);
-        document.getElementById('deleteMsg').innerText = await res.text();
-      }
-    </script>
-  </body>
-  </html>
-  `;
-}
-
-// =============================
-// HTTP Server Routes
-// =============================
-const server = http.createServer((req, res) => {
-  const parsedUrl = urlModule.parse(req.url, true);
-  const pathname = parsedUrl.pathname;
-  const query = parsedUrl.query;
-
-  // Home → redirect to menu
-  if (pathname === '/' && req.method === 'GET') {
-    res.writeHead(302, { Location: '/menu' });
-    return res.end();
+  // ===== Home =====
+  if (url === '/' && method === 'GET') {
+    res.writeHead(200, { 'Content-Type': 'text/plain' });
+    return res.end('Welcome to Backend Page with JSON FS!');
   }
 
-  // Menu page
-  if (pathname === '/menu' && req.method === 'GET') {
+  // ===== MENU PAGE =====
+  if (url === '/menu' && method === 'GET') {
     res.writeHead(200, { 'Content-Type': 'text/html' });
-    return res.end(renderMenu());
+    return res.end(`
+      <html>
+      <head>
+        <title>Menu</title>
+        <style>
+          body { font-family: Arial; padding: 20px; background: #f8f8f8; }
+          h1 { color: #333; }
+          input, select, button { margin: 5px; padding: 6px; }
+          table { border-collapse: collapse; width: 100%; margin-top: 20px; background: #fff; }
+          th, td { border: 1px solid #ccc; padding: 8px; text-align: left; }
+          th { background: #eee; }
+          .url-box { background: #eee; padding: 8px; margin-top: 10px; border-radius: 6px; font-family: monospace; }
+          .add-user { margin-top: 20px; padding: 10px; background: #f0f0f0; border-radius: 6px; }
+        </style>
+      </head>
+      <body>
+        <h1> User Menu</h1>
+
+        <!-- Search/Filter/Sort -->
+        <div>
+          <input id="search" placeholder="Search by name/email">
+          <input id="filterAge" placeholder="Filter by age" type="number">
+          <select id="sort">
+            <option value="">Sort by...</option>
+            <option value="name">Name</option>
+            <option value="age">Age</option>
+            <option value="id">ID</option>
+          </select>
+          <select id="order">
+            <option value="asc">Ascending</option>
+            <option value="desc">Descending</option>
+          </select>
+          <button onclick="loadUsers()">Apply</button>
+        </div>
+
+        <div class="url-box" id="urlBox">Request: /read</div>
+
+        <table id="userTable">
+          <thead>
+            <tr><th>ID</th><th>Name</th><th>Age</th><th>Email</th></tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+
+        <!-- Add User Form -->
+        <div class="add-user">
+          <h3>Add New User</h3>
+          <input id="newName" placeholder="Name">
+          <input id="newAge" type="number" placeholder="Age">
+          <input id="newEmail" placeholder="Email">
+          <button onclick="addUser()">Add User</button>
+          <div id="addStatus"></div>
+        </div>
+
+        <script>
+          async function loadUsers() {
+            const search = document.getElementById('search').value;
+            const age = document.getElementById('filterAge').value;
+            const sort = document.getElementById('sort').value;
+            const order = document.getElementById('order').value;
+
+            let query = [];
+            if (search) query.push('search=' + encodeURIComponent(search));
+            if (age) query.push('age=' + encodeURIComponent(age));
+            if (sort) query.push('sort=' + sort);
+            if (order) query.push('order=' + order);
+
+            const url = '/read' + (query.length ? '?' + query.join('&') : '');
+            document.getElementById('urlBox').innerText = 'Request: ' + url;
+
+            const res = await fetch(url);
+            const users = await res.json();
+
+            const tbody = document.querySelector('#userTable tbody');
+            tbody.innerHTML = '';
+            users.forEach(u => {
+              const tr = document.createElement('tr');
+              tr.innerHTML = '<td>' + u.id + '</td><td>' + (u.name || '-') + '</td><td>' + (u.age || '-') + '</td><td>' + (u.email || '-') + '</td>';
+              tbody.appendChild(tr);
+            });
+          }
+
+          async function addUser() {
+            const name = document.getElementById('newName').value;
+            const age = document.getElementById('newAge').value;
+            const email = document.getElementById('newEmail').value;
+
+            if (!name) {
+              document.getElementById('addStatus').innerText = 'Name is required!';
+              return;
+            }
+
+            // Build /write URL
+            const url = '/write?name=' + encodeURIComponent(name) +
+                        (age ? '&age=' + encodeURIComponent(age) : '') +
+                        (email ? '&email=' + encodeURIComponent(email) : '');
+            
+            const res = await fetch(url);
+            const text = await res.text();
+            document.getElementById('addStatus').innerText = text;
+
+            // Clear form
+            document.getElementById('newName').value = '';
+            document.getElementById('newAge').value = '';
+            document.getElementById('newEmail').value = '';
+
+            // Reload table
+            loadUsers();
+          }
+
+          window.onload = loadUsers;
+        </script>
+      </body>
+      </html>
+    `);
   }
 
-  // Read all
-  if (pathname === '/read' && req.method === 'GET') {
+  // ===== READ all, search, sort, filter =====
+  if (url.startsWith('/read') && method === 'GET') {
     const data = readData();
+    const query = new URL(`http://localhost:${PORT}${url}`).searchParams;
+    let filteredData = data;
+
+    // SEARCH
+    const search = query.get('search');
+    if (search) {
+      filteredData = filteredData.filter(
+        u =>
+          (u.name && u.name.toLowerCase().includes(search.toLowerCase())) ||
+          (u.email && u.email.toLowerCase().includes(search.toLowerCase()))
+      );
+    }
+
+    // FILTER
+    query.forEach((value, key) => {
+      if (!['search', 'sort', 'order'].includes(key)) {
+        filteredData = filteredData.filter(u => String(u[key]) === value);
+      }
+    });
+
+    // SORT
+    const sortKey = query.get('sort');
+    const order = query.get('order') || 'asc';
+    if (sortKey) {
+      filteredData.sort((a, b) => {
+        if (a[sortKey] < b[sortKey]) return order === 'asc' ? -1 : 1;
+        if (a[sortKey] > b[sortKey]) return order === 'asc' ? 1 : -1;
+        return 0;
+      });
+    }
+
     res.writeHead(200, { 'Content-Type': 'application/json' });
-    return res.end(JSON.stringify(data));
+    return res.end(JSON.stringify(filteredData));
   }
 
-  // Read by ID
-  if (pathname.startsWith('/read/') && req.method === 'GET') {
-    const id = parseInt(pathname.split('/')[2]);
+  // ===== READ by ID =====
+  if (url.startsWith('/read/') && method === 'GET') {
+    const id = parseInt(url.split('/')[2]);
     const data = readData();
     const user = data.find(u => u.id === id);
-    res.writeHead(user ? 200 : 404, { 'Content-Type': 'application/json' });
-    return res.end(JSON.stringify(user || { error: 'User not found' }));
+    if (!user) {
+      res.writeHead(404, { 'Content-Type': 'text/plain' });
+      return res.end('User not found');
+    }
+    res.writeHead(200, { 'Content-Type': 'application/json' });
+    return res.end(JSON.stringify(user));
   }
 
-  // Write user
-  if (pathname === '/write' && req.method === 'GET') {
-    const id = query.id ? parseInt(query.id) : null;
-    const name = query.name;
-    const age = query.age ? parseInt(query.age) : null;
+  // ===== WRITE =====
+  if (url.startsWith('/write') && method === 'GET') {
+    const params = new URL(`http://localhost:${PORT}${url}`).searchParams;
+    const name = params.get('name');
+    const age = parseInt(params.get('age')) || null;
+    const email = params.get('email');
 
-    if (!id || !name || !age) {
+    if (!name) {
       res.writeHead(400, { 'Content-Type': 'text/plain' });
-      return res.end('Missing or invalid parameters');
+      return res.end('Name is required');
     }
 
     const data = readData();
-    if (data.find(u => u.id === id)) {
-      res.writeHead(400, { 'Content-Type': 'text/plain' });
-      return res.end('ID already exists');
-    }
-
-    data.push({ id, name, age });
+    const newUser = { id: data.length + 1, name, age, email };
+    data.push(newUser);
     writeData(data);
+
     res.writeHead(200, { 'Content-Type': 'text/plain' });
     return res.end('✅ Successfully written!');
   }
 
-  // Delete user
-  if (pathname === '/delete' && req.method === 'GET') {
-    const id = query.id ? parseInt(query.id) : null;
-    if (!id) {
-      res.writeHead(400, { 'Content-Type': 'text/plain' });
-      return res.end('Missing ID');
-    }
-
-    const data = readData();
-    const index = data.findIndex(u => u.id === id);
-    if (index === -1) {
-      res.writeHead(404, { 'Content-Type': 'text/plain' });
-      return res.end('User not found');
-    }
-
-    data.splice(index, 1);
-    writeData(data);
-    res.writeHead(200, { 'Content-Type': 'text/plain' });
-    return res.end('✅ User deleted successfully!');
-  }
-
-  // Route not found
+  // ===== Not Found =====
   res.writeHead(404, { 'Content-Type': 'text/plain' });
   res.end('Route not found');
 });
 
-// =============================
-// Start Server
-// =============================
+// ===== Start Server =====
 server.listen(PORT, () => {
-  console.log(`🌐 Server running at http://localhost:${PORT}/menu`);
+  console.log(`✅ Server running at http://localhost:${PORT}`);
 });

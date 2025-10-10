@@ -2,36 +2,49 @@
   {
     "id": 1,
     "name": "Dinesh",
+    "age": 25,
     "email": "dinesh@example.com"
   },
   {
     "id": 2,
-    "name": "kalai",
+    "name": "Kalai",
+    "age": 28,
     "email": "kalai@example.com"
   },
   {
     "id": 3,
-    "name": "vicky",
+    "name": "Vicky",
+    "age": 22,
     "email": "vicky@example.com"
   },
   {
     "id": 4,
-    "name": "bala",
-    "age": 34
+    "name": "Bala",
+    "age": 34,
+    "email": "bala@example.com"
   },
   {
     "id": 5,
-    "name": "Dinesh",
-    "age": 25
+    "name": "Arun",
+    "age": 30,
+    "email": "arun@example.com"
   },
   {
-    "id": 5,
-    "name": "dinesh",
-    "age": 23
+    "id": 6,
+    "name": "Priya",
+    "age": 27,
+    "email": "priya@example.com"
   },
   {
     "id": 7,
-    "name": "Dinesh",
-    "age": 25
+    "name": "Ramesh",
+    "age": 26,
+    "email": "ramesh@example.com"
+  },
+  {
+    "id": 8,
+    "name": "Sneha",
+    "age": 24,
+    "email": "sneha@example.com"
   }
 ]
