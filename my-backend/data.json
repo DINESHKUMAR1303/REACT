@@ -1,8 +1,8 @@
 [
   {
     "id": 1,
-    "name": "Dinesh",
-    "age": 25,
+    "name": "kumarUpdated",
+    "age": 20,
     "email": "dinesh@example.com"
   },
   {
@@ -55,8 +55,26 @@
   },
   {
     "id": 16,
-    "name": "kala@email=ee",
+    "name": "KalaUpdated",
+    "age": 30,
+    "email": null
+  },
+  {
+    "id": 17,
+    "name": "bala",
     "age": null,
     "email": null
+  },
+  {
+    "id": 40,
+    "name": "nala@email=ee",
+    "age": null,
+    "email": null
+  },
+  {
+    "id": 18,
+    "name": "Vicky",
+    "age": 22,
+    "email": "vicky@gmail.com"
   }
 ]

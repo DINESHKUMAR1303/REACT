@@ -22,7 +22,7 @@ function writeData(data) {
 
 // ===== Home =====
 app.get('/', (req, res) => {
-  res.send('Welcome to Backend !');
+  res.send('Welcome to Backend!');
 });
 
 // ===== Read all users =====
@@ -32,7 +32,6 @@ app.get('/read', (req, res) => {
 
   let filteredData = data;
 
-  // Search by name or email
   if (search) {
     filteredData = filteredData.filter(
       u =>
@@ -41,12 +40,10 @@ app.get('/read', (req, res) => {
     );
   }
 
-  // Filter by any other query parameters (like age)
   for (const key in filters) {
     filteredData = filteredData.filter(u => String(u[key]) === filters[key]);
   }
 
-  // Sort
   if (sort) {
     const sortOrder = order === 'desc' ? -1 : 1;
     filteredData.sort((a, b) => {
@@ -69,7 +66,7 @@ app.get('/read/:id', (req, res) => {
   res.json(user);
 });
 
-// ===== Write (Add) user via POST JSON body =====
+// ===== Add user via POST JSON =====
 app.post('/write', (req, res) => {
   const { name, age, email, id } = req.body;
 
@@ -78,17 +75,16 @@ app.post('/write', (req, res) => {
   const data = readData();
   const newId = id ? parseInt(id) : (data.length ? Math.max(...data.map(u => u.id)) + 1 : 1);
 
-  // Check for duplicate ID
   if (data.some(u => u.id === newId)) return res.status(400).json({ message: 'ID already exists' });
 
   const newUser = { id: newId, name, age: age || null, email: email || null };
   data.push(newUser);
   writeData(data);
 
-  res.json({ message: '✅ User added successfully!', user: newUser });
+  res.json({ message: 'User added successfully!', user: newUser });
 });
 
-// ===== Write (Add) user via GET query parameters =====
+// ===== Add user via GET query (Browser-friendly) =====
 app.get('/write', (req, res) => {
   const { id, name, age, email } = req.query;
 
@@ -97,17 +93,78 @@ app.get('/write', (req, res) => {
   const data = readData();
   const newId = id ? parseInt(id) : (data.length ? Math.max(...data.map(u => u.id)) + 1 : 1);
 
-  // Check for duplicate ID
   if (data.some(u => u.id === newId)) return res.status(400).send('ID already exists');
 
   const newUser = { id: newId, name, age: age ? parseInt(age) : null, email: email || null };
   data.push(newUser);
   writeData(data);
 
-  res.send(`✅ User added successfully! ID: ${newId}, Name: ${name}`);
+  res.send(`User added successfully! ID: ${newId}, Name: ${name}`);
+});
+
+// ===== Update user via PUT (Postman/curl) =====
+app.put('/update/:id', (req, res) => {
+  const id = parseInt(req.params.id);
+  const { name, age, email } = req.body;
+
+  const data = readData();
+  const index = data.findIndex(u => u.id === id);
+
+  if (index === -1) return res.status(404).json({ message: 'User not found' });
+
+  if (name !== undefined) data[index].name = name;
+  if (age !== undefined) data[index].age = age;
+  if (email !== undefined) data[index].email = email;
+
+  writeData(data);
+  res.json({ message: 'User updated successfully!', user: data[index] });
+});
+
+// ===== Update user via GET query (Browser-friendly) =====
+app.get('/update', (req, res) => {
+  const { id, name, age, email } = req.query;
+  if (!id) return res.status(400).send('ID is required');
+
+  const data = readData();
+  const index = data.findIndex(u => u.id === parseInt(id));
+  if (index === -1) return res.status(404).send('User not found');
+
+  if (name) data[index].name = name;
+  if (age) data[index].age = parseInt(age);
+  if (email) data[index].email = email;
+
+  writeData(data);
+  res.send(`User ID ${id} updated successfully!`);
+});
+
+// ===== Delete user via DELETE (Postman/curl) =====
+app.delete('/delete/:id', (req, res) => {
+  const id = parseInt(req.params.id);
+
+  const data = readData();
+  const newData = data.filter(u => u.id !== id);
+
+  if (newData.length === data.length) return res.status(404).json({ message: 'User not found' });
+
+  writeData(newData);
+  res.json({ message: 'User deleted successfully!' });
+});
+
+// ===== Delete user via GET query (Browser-friendly) =====
+app.get('/delete', (req, res) => {
+  const { id } = req.query;
+  if (!id) return res.status(400).send('ID is required');
+
+  const data = readData();
+  const newData = data.filter(u => u.id !== parseInt(id));
+
+  if (newData.length === data.length) return res.status(404).send('User not found');
+
+  writeData(newData);
+  res.send(`User ID ${id} deleted successfully!`);
 });
 
 // ===== Start server =====
 app.listen(PORT, () => {
-  console.log(`✅ Express server running at http://localhost:${PORT}`);
+  console.log(`Express server running at http://localhost:${PORT}`);
 });
