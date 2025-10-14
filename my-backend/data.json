@@ -1,7 +1,7 @@
 [
   {
     "id": 1,
-    "name": "kumarUpdated",
+    "name": "Dinesh",
     "age": 20,
     "email": "dinesh@example.com"
   },
@@ -62,12 +62,6 @@
   {
     "id": 17,
     "name": "bala",
-    "age": null,
-    "email": null
-  },
-  {
-    "id": 40,
-    "name": "nala@email=ee",
     "age": null,
     "email": null
   },

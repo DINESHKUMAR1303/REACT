@@ -32,6 +32,7 @@ app.get('/read', (req, res) => {
 
   let filteredData = data;
 
+  // Search by name/email
   if (search) {
     filteredData = filteredData.filter(
       u =>
@@ -40,10 +41,12 @@ app.get('/read', (req, res) => {
     );
   }
 
+  // Filter by other query parameters
   for (const key in filters) {
     filteredData = filteredData.filter(u => String(u[key]) === filters[key]);
   }
 
+  // Sort
   if (sort) {
     const sortOrder = order === 'desc' ? -1 : 1;
     filteredData.sort((a, b) => {
@@ -142,11 +145,13 @@ app.delete('/delete/:id', (req, res) => {
   const id = parseInt(req.params.id);
 
   const data = readData();
-  const newData = data.filter(u => u.id !== id);
+  const index = data.findIndex(u => u.id === id);
 
-  if (newData.length === data.length) return res.status(404).json({ message: 'User not found' });
+  if (index === -1) return res.status(404).json({ message: 'User not found' });
 
-  writeData(newData);
+  data.splice(index, 1); // remove the user
+  writeData(data);
+
   res.json({ message: 'User deleted successfully!' });
 });
 
@@ -156,15 +161,16 @@ app.get('/delete', (req, res) => {
   if (!id) return res.status(400).send('ID is required');
 
   const data = readData();
-  const newData = data.filter(u => u.id !== parseInt(id));
+  const index = data.findIndex(u => u.id === parseInt(id));
+  if (index === -1) return res.status(404).send('User not found');
 
-  if (newData.length === data.length) return res.status(404).send('User not found');
+  data.splice(index, 1); // remove the user
+  writeData(data);
 
-  writeData(newData);
   res.send(`User ID ${id} deleted successfully!`);
 });
 
 // ===== Start server =====
 app.listen(PORT, () => {
-  console.log(`Express server running at http://localhost:${PORT}`);
+  console.log(`✅ Express server running at http://localhost:${PORT}`);
 });
