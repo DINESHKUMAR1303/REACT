@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const app = express();
 const PORT = 2831;
 
+// Connect to MongoDB
 mongoose
   .connect("mongodb://localhost:27017/students", {
     useNewUrlParser: true,
@@ -11,6 +12,7 @@ mongoose
   .then(() => console.log("MongoDB Connected to 'students' Database"))
   .catch((err) => console.error("MongoDB Connection Error:", err));
 
+// Define Schema and Model
 const userSchema = new mongoose.Schema({
   id: Number,
   name: String,
@@ -21,7 +23,7 @@ const User = mongoose.model("User", userSchema);
 
 // Home
 app.get("/", (req, res) => {
-  res.send("Welcome to MongoDB + Express FS Backend!");
+  res.send("Welcome to MongoDB");
 });
 
 // Add New User via GET
@@ -99,11 +101,12 @@ app.get("/delete", async (req, res) => {
   res.send(`User with ID ${id} deleted successfully!`);
 });
 
-// Get All Users (search, filter, sort)
+// Get All Users (search, filter, sort, order)
 app.get("/users", async (req, res) => {
-  let { search, sort, filter } = req.query;
+  let { search, sort, filter, order } = req.query; // added 'order'
   let query = {};
 
+  // Search by name/email
   if (search) {
     query.$or = [
       { name: { $regex: search, $options: "i" } },
@@ -111,12 +114,27 @@ app.get("/users", async (req, res) => {
     ];
   }
 
+  // Filter by role
   if (filter) query.role = filter;
 
   let users = await User.find(query);
 
-  if (sort === "name") users.sort((a, b) => a.name.localeCompare(b.name));
-  if (sort === "id") users.sort((a, b) => a.id - b.id);
+  // Sort with ascending/descending
+  if (sort === "name") {
+    if (order === "desc") {
+      users.sort((a, b) => b.name.localeCompare(a.name));
+    } else {
+      users.sort((a, b) => a.name.localeCompare(b.name));
+    }
+  }
+
+  if (sort === "id") {
+    if (order === "desc") {
+      users.sort((a, b) => b.id - a.id);
+    } else {
+      users.sort((a, b) => a.id - b.id);
+    }
+  }
 
   res.json({ users });
 });
