@@ -172,5 +172,5 @@ app.get('/delete', (req, res) => {
 
 // ===== Start server =====
 app.listen(PORT, () => {
-  console.log(`✅ Express server running at http://localhost:${PORT}`);
+  console.log(` Express server running at http://localhost:${PORT}`);
 });

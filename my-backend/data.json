@@ -1,7 +1,7 @@
 [
   {
     "id": 1,
-    "name": "Dinesh",
+    "name": "kumar",
     "age": 20,
     "email": "dinesh@example.com"
   },
@@ -70,5 +70,11 @@
     "name": "Vicky",
     "age": 22,
     "email": "vicky@gmail.com"
+  },
+  {
+    "id": 22,
+    "name": "kala@email=ee",
+    "age": null,
+    "email": null
   }
 ]
