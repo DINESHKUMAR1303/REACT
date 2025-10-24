@@ -84,6 +84,33 @@ app.post("/register", upload.single("file"), async (req, res) => {
   }
 });
 
+// Login Route
+app.post("/login", async (req, res) => {
+  try {
+    const { email, password } = req.body;
+
+    if (!email || !password) {
+      return res.status(400).json({ error: "Email and Password are required" });
+    }
+
+    const user = await User.findOne({ email });
+    if (!user) return res.status(404).json({ error: "User not found" });
+
+    // Check password (currently plain text)
+    if (user.password !== password) {
+      return res.status(401).json({ error: "Invalid password" });
+    }
+
+    res.status(200).json({
+      message: "Login successful",
+      user: { name: user.name, email: user.email, phone: user.phone },
+    });
+  } catch (error) {
+    console.error("Server error:", error);
+    res.status(500).json({ error: "Server error" });
+  }
+});
+
 // ===== Start Server =====
 app.listen(PORT, () => {
   console.log(`🚀 Server running on http://localhost:${PORT}`);

@@ -29,20 +29,27 @@ const App = () => {
     setSignupForm({ ...signupForm, [name]: files ? files[0] : value });
   };
 
-  // Login submit (currently only logs form)
+  // ===== Login Submit =====
   const handleLoginSubmit = async () => {
     if (!loginForm.email || !loginForm.password) {
       alert('Please fill in all login fields');
       return;
     }
-    // You can integrate actual login API here
-    console.log('Login submitted:', loginForm);
-    alert('Login functionality not implemented yet');
+
+    try {
+      const res = await axios.post('http://localhost:5000/login', loginForm);
+      alert(res.data.message); // e.g., "Login successful"
+      console.log('Logged in user:', res.data.user);
+
+      // Optionally store user in localStorage or state for session
+      // localStorage.setItem('user', JSON.stringify(res.data.user));
+    } catch (err) {
+      alert(err.response?.data?.error || err.message);
+    }
   };
 
-  // Signup submit
+  // ===== Signup Submit =====
   const handleSignupSubmit = async () => {
-    // Validate required fields
     let newErrors = { name: '', phone: '' };
     if (!signupForm.name) newErrors.name = 'Full name is required';
     if (!signupForm.phone || !/^\d{10}$/.test(signupForm.phone)) {
@@ -73,7 +80,7 @@ const App = () => {
         headers: { 'Content-Type': 'multipart/form-data' },
       });
 
-      alert(res.data.message);
+      alert(res.data.message); // "User registered successfully"
       setSignupForm({
         name: '',
         phone: '',
@@ -85,6 +92,7 @@ const App = () => {
       });
       setAgreeTerms(false);
       setErrors({ name: '', phone: '' });
+      setActiveTab('login'); // Switch to login after successful signup
     } catch (err) {
       alert(err.response?.data?.error || err.message);
     }
@@ -110,7 +118,7 @@ const App = () => {
           </button>
         </div>
 
-        {/* Login Form */}
+        {/* ===== Login Form ===== */}
         {activeTab === 'login' && (
           <div className="form active">
             <div className="form-group">
@@ -148,7 +156,7 @@ const App = () => {
           </div>
         )}
 
-        {/* Signup Form */}
+        {/* ===== Signup Form ===== */}
         {activeTab === 'signup' && (
           <div className="form active">
             <div className="form-group">
