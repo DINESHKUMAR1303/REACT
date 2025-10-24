@@ -1,36 +1,150 @@
+/* General body styling */
+body {
+  font-family: Arial, sans-serif;
+  background: #eaeef5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+
+/* Container for forms */
 .container {
+  background: #fff;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
   width: 350px;
-  margin: 100px auto;
-  padding: 20px;
-  border-radius: 10px;
-  background: #f7f7f7;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
-h2 {
+/* Title */
+.title {
   text-align: center;
+  font-size: 24px;
+  font-weight: bold;
   margin-bottom: 20px;
+  color: #333;
 }
 
-input {
-  display: block;
-  width: 100%;
-  padding: 10px;
-  margin: 10px 0;
-  border: 1px solid #ccc;
-  border-radius: 5px;
+/* Tabs styling */
+.tabs {
+  display: flex;
+  margin-bottom: 20px;
+  border-bottom: 2px solid #ccc;
 }
 
-button {
-  width: 100%;
+.tab-btn {
+  flex: 1;
   padding: 10px;
-  background: #0078d7;
-  color: white;
+  background: none;
   border: none;
-  border-radius: 5px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  color: #555;
+  border-bottom: 3px solid transparent;
+  transition: all 0.3s ease;
+}
+
+.tab-btn.active {
+  color: #407bff;
+  border-bottom-color: #407bff;
+}
+
+/* Form visibility */
+.form {
+  display: none;
+}
+
+.form.active {
+  display: block;
+}
+
+/* Form groups */
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 10px;
+  font-size: 14px;
+  color: #333;
+}
+
+.form-group input,
+.form-group select {
+  width: 100%;
+  padding: 10px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  box-sizing: border-box;
+  transition: all 0.2s ease;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  border-color: #407bff;
+  outline: none;
+}
+
+/* Checkbox styling */
+.checkbox {
+  font-size: 13px;
+  margin-bottom: 10px;
+}
+
+.checkbox input {
+  margin-right: 5px;
+}
+
+/* Forgot password link */
+.forgot {
+  font-size: 13px;
+  text-align: right;
+  color: #407bff;
+  margin-bottom: 15px;
   cursor: pointer;
 }
 
-button:hover {
-  background: #005ea2;
+/* Buttons */
+.btn {
+  width: 100%;
+  padding: 10px;
+  background: #f44336;
+  color: white;
+  font-size: 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn:hover {
+  background: #d9362f;
+}
+
+/* Error messages */
+.error {
+  color: red;
+  font-size: 13px;
+  margin-top: 5px;
+}
+
+/* Responsive for smaller screens */
+@media (max-width: 400px) {
+  .container {
+    width: 90%;
+    padding: 20px;
+  }
+
+  .title {
+    font-size: 20px;
+  }
+
+  .tab-btn {
+    font-size: 14px;
+  }
 }

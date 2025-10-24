@@ -1,14 +1,18 @@
 // backend/server.js
+
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
+const multer = require("multer");
+const path = require("path");
 
 const app = express();
-const PORT = 5000;
+const PORT = process.env.PORT || 5000;
 
 // ===== Middleware =====
 app.use(cors());
-app.use(express.json()); // Parse JSON request body
+app.use(express.json());
+app.use("/uploads", express.static(path.join(__dirname, "uploads"))); // Serve uploaded files
 
 // ===== MongoDB Connection =====
 mongoose
@@ -19,37 +23,64 @@ mongoose
   .then(() => console.log("✅ MongoDB connected successfully"))
   .catch((err) => console.error("❌ MongoDB connection error:", err));
 
-// ===== Schema & Model =====
+// ===== User Schema & Model =====
 const userSchema = new mongoose.Schema({
-  name: String,
-  email: String,
-  password: String,
+  name: { type: String, required: true },
+  phone: { type: String },
+  dob: { type: String },
+  email: { type: String, required: true, unique: true },
+  password: { type: String, required: true },
+  qualification: { type: String },
+  file: { type: String },
 });
 
 const User = mongoose.model("User", userSchema);
 
+// ===== Multer Config for File Upload =====
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, "uploads/"); // Folder must exist
+  },
+  filename: function (req, file, cb) {
+    cb(null, Date.now() + "-" + file.originalname);
+  },
+});
+
+const upload = multer({ storage });
+
 // ===== Routes =====
-app.post("/register", async (req, res) => {
+
+// Signup Route
+app.post("/register", upload.single("file"), async (req, res) => {
+  console.log("REQ.BODY:", req.body);
+  console.log("REQ.FILE:", req.file);
+
   try {
-    console.log("REQ.BODY:", req.body); // For debugging
-    const { name, email, password } = req.body;
+    const { name, phone, dob, email, password, qualification } = req.body;
+    const file = req.file ? req.file.filename : null;
 
     if (!name || !email || !password) {
-      return res.status(400).json({ error: "All fields are required" });
+      return res.status(400).json({ error: "Name, Email, and Password are required" });
     }
 
     const existingUser = await User.findOne({ email });
-    if (existingUser) {
-      return res.status(409).json({ error: "User already exists" });
-    }
+    if (existingUser) return res.status(409).json({ error: "User already exists" });
 
-    const newUser = new User({ name, email, password });
+    const newUser = new User({
+      name,
+      phone,
+      dob,
+      email,
+      password,
+      qualification,
+      file,
+    });
+
     await newUser.save();
-
     res.status(201).json({ message: "User registered successfully" });
   } catch (error) {
     console.error("Server error:", error);
-    res.status(500).json({ error: "Error registering user" });
+    res.status(500).json({ error: "Server error" });
   }
 });
 
