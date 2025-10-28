@@ -1,150 +1,243 @@
-/* General body styling */
+/* ======================================= */
+/* 🌌 Premium Glass UI — NSCHOOL Login Page */
+/* ======================================= */
+
+/* === COLOR VARIABLES === */
+:root {
+  --primary: #6366f1; /* Soft Indigo */
+  --primary-light: #818cf8;
+  --accent: #fbbf24; /* Gold */
+  --danger: #ef4444;
+  --success: #10b981;
+  --text: #e2e8f0;
+  --text-light: #94a3b8;
+  --white: #ffffff;
+  --bg-dark: #0f172a;
+  --bg-gradient: linear-gradient(135deg, #0f172a, #1e293b, #111827);
+  --glass-bg: rgba(30, 41, 59, 0.6);
+  --border-glow: rgba(99, 102, 241, 0.6);
+  --shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+}
+
+/* === Body === */
 body {
-  font-family: Arial, sans-serif;
-  background: #eaeef5;
+  font-family: "Poppins", Arial, sans-serif;
+  background: var(--bg-gradient);
+  background-size: 300% 300%;
+  animation: bgShift 12s ease-in-out infinite;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  min-height: 100vh;
   margin: 0;
+  color: var(--text);
 }
 
-/* Container for forms */
+@keyframes bgShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* === Glass Container === */
 .container {
-  background: #fff;
-  padding: 30px;
-  border-radius: 12px;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-  width: 350px;
+  background: var(--glass-bg);
+  backdrop-filter: blur(18px);
+  border: 1px solid rgba(99, 102, 241, 0.25);
+  border-radius: 20px;
+  box-shadow: var(--shadow);
+  padding: 40px 35px;
+  width: 400px;
+  transition: all 0.4s ease;
 }
 
-/* Title */
+.container:hover {
+  box-shadow: 0 15px 45px rgba(99, 102, 241, 0.3);
+  transform: translateY(-4px);
+}
+
+/* === Title === */
 .title {
   text-align: center;
-  font-size: 24px;
-  font-weight: bold;
-  margin-bottom: 20px;
-  color: #333;
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--primary-light);
+  margin-bottom: 25px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  text-shadow: 0 0 10px rgba(99, 102, 241, 0.6);
 }
 
-/* Tabs styling */
+/* === Tabs === */
 .tabs {
   display: flex;
-  margin-bottom: 20px;
-  border-bottom: 2px solid #ccc;
+  justify-content: space-between;
+  margin-bottom: 25px;
+  border-bottom: 2px solid rgba(99, 102, 241, 0.3);
 }
 
 .tab-btn {
   flex: 1;
-  padding: 10px;
+  padding: 12px;
   background: none;
   border: none;
   font-size: 16px;
-  font-weight: bold;
+  font-weight: 600;
   cursor: pointer;
-  color: #555;
+  color: var(--text-light);
   border-bottom: 3px solid transparent;
   transition: all 0.3s ease;
 }
 
-.tab-btn.active {
-  color: #407bff;
-  border-bottom-color: #407bff;
+.tab-btn:hover {
+  color: var(--accent);
 }
 
-/* Form visibility */
+.tab-btn.active {
+  color: var(--primary-light);
+  border-bottom-color: var(--primary-light);
+  text-shadow: 0 0 8px rgba(129, 140, 248, 0.6);
+}
+
+/* === Form === */
 .form {
   display: none;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.4s ease, transform 0.4s ease;
 }
 
 .form.active {
   display: block;
+  opacity: 1;
+  transform: translateY(0);
 }
 
-/* Form groups */
+/* === Form Groups === */
 .form-group {
-  margin-bottom: 15px;
+  margin-bottom: 16px;
 }
 
 .form-group label {
   display: block;
-  margin-bottom: 10px;
+  margin-bottom: 6px;
   font-size: 14px;
-  color: #333;
+  color: var(--text-light);
 }
 
 .form-group input,
 .form-group select {
   width: 100%;
-  padding: 10px;
+  padding: 10px 12px;
   font-size: 14px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
+  border: 1px solid rgba(99, 102, 241, 0.3);
+  border-radius: 10px;
+  background: rgba(17, 24, 39, 0.6);
+  color: var(--white);
+  transition: all 0.3s ease;
   box-sizing: border-box;
-  transition: all 0.2s ease;
+}
+
+.form-group input::placeholder {
+  color: #9ca3af;
 }
 
 .form-group input:focus,
 .form-group select:focus {
-  border-color: #407bff;
+  border-color: var(--primary-light);
+  box-shadow: 0 0 10px rgba(99, 102, 241, 0.4);
   outline: none;
 }
 
-/* Checkbox styling */
+/* === Checkbox === */
 .checkbox {
-  font-size: 13px;
+  display: flex;
+  align-items: center;
+  color: var(--text-light);
+  font-size: 14px;
   margin-bottom: 10px;
 }
 
 .checkbox input {
-  margin-right: 5px;
+  margin-right: 8px;
+  accent-color: var(--primary-light);
 }
 
-/* Forgot password link */
+/* === Forgot Password === */
 .forgot {
   font-size: 13px;
   text-align: right;
-  color: #407bff;
-  margin-bottom: 15px;
+  color: var(--accent);
   cursor: pointer;
+  margin-bottom: 15px;
+  transition: 0.3s ease;
 }
 
-/* Buttons */
+.forgot:hover {
+  color: var(--primary-light);
+  text-decoration: underline;
+}
+
+/* === Buttons === */
 .btn {
   width: 100%;
-  padding: 10px;
-  background: #f44336;
-  color: white;
-  font-size: 16px;
+  padding: 12px;
+  background: linear-gradient(135deg, var(--primary), var(--primary-light));
+  color: var(--white);
   border: none;
-  border-radius: 6px;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: 600;
   cursor: pointer;
+  letter-spacing: 0.5px;
   transition: all 0.3s ease;
+  box-shadow: 0 5px 18px rgba(99, 102, 241, 0.4);
 }
 
 .btn:hover {
-  background: #d9362f;
+  background: linear-gradient(135deg, var(--primary-light), var(--accent));
+  box-shadow: 0 8px 25px rgba(251, 191, 36, 0.4);
+  transform: translateY(-2px);
 }
 
-/* Error messages */
+/* === Error Message === */
 .error {
-  color: red;
+  color: var(--danger);
   font-size: 13px;
-  margin-top: 5px;
+  margin-top: 6px;
+  font-weight: 500;
 }
 
-/* Responsive for smaller screens */
-@media (max-width: 400px) {
+/* === Success Message === */
+.success {
+  color: var(--success);
+  font-size: 13px;
+  margin-top: 6px;
+  font-weight: 500;
+}
+
+/* === Responsive Design === */
+@media (max-width: 480px) {
   .container {
     width: 90%;
-    padding: 20px;
+    padding: 25px;
   }
 
   .title {
-    font-size: 20px;
+    font-size: 22px;
   }
 
   .tab-btn {
     font-size: 14px;
+  }
+
+  .btn {
+    font-size: 15px;
   }
 }
