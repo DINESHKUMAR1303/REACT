@@ -21,7 +21,7 @@ const __dirname = path.dirname(__filename);
 // ===== Middleware =====
 app.use(cors());
 app.use(express.json());
-app.use("/uploads", express.static(path.join(__dirname, "uploads")));
+app.use("/uploads", express.static(path.join(__dirname, "uploads"))); // serve uploaded images
 
 // ===== MongoDB Connection =====
 mongoose
@@ -41,7 +41,7 @@ const userSchema = new mongoose.Schema(
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true },
     qualification: { type: String },
-    file: { type: String },
+    file: { type: String }, // will now store full image URL
   },
   { timestamps: true }
 );
@@ -85,7 +85,6 @@ const verifyToken = (req, res, next) => {
 app.post("/register", upload.single("file"), async (req, res) => {
   try {
     const { name, phone, dob, email, password, qualification } = req.body;
-    const file = req.file ? req.file.filename : null;
 
     if (!name || !email || !password)
       return res.status(400).json({ error: "Name, Email, and Password are required." });
@@ -96,6 +95,11 @@ app.post("/register", upload.single("file"), async (req, res) => {
 
     const hashedPassword = await bcrypt.hash(password, 10);
 
+    // Build file path (absolute URL)
+    const filePath = req.file
+      ? `${req.protocol}://${req.get("host")}/uploads/${req.file.filename}`
+      : null;
+
     const newUser = new User({
       name,
       phone,
@@ -103,12 +107,12 @@ app.post("/register", upload.single("file"), async (req, res) => {
       email,
       password: hashedPassword,
       qualification,
-      file,
+      file: filePath, // ✅ full URL path
     });
 
     await newUser.save();
 
-    res.status(201).json({ message: "✅ User registered successfully!" });
+    res.status(201).json({ message: "✅ User registered successfully!", filePath });
   } catch (error) {
     console.error("❌ Registration Error:", error);
     res.status(500).json({ error: "Internal Server Error" });
@@ -139,7 +143,14 @@ app.post("/login", async (req, res) => {
     res.status(200).json({
       message: "✅ Login successful!",
       token,
-      user: { name: user.name, email: user.email, phone: user.phone },
+      user: {
+        name: user.name,
+        email: user.email,
+        phone: user.phone,
+        dob: user.dob,
+        qualification: user.qualification,
+        file: user.file, // ✅ send image URL to frontend
+      },
     });
   } catch (error) {
     console.error("❌ Login Error:", error);

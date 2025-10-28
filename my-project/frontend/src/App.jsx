@@ -4,12 +4,7 @@ import "./App.css";
 
 const App = () => {
   const [activeTab, setActiveTab] = useState("login");
-
-  const [loginForm, setLoginForm] = useState({
-    email: "",
-    password: "",
-  });
-
+  const [loginForm, setLoginForm] = useState({ email: "", password: "" });
   const [signupForm, setSignupForm] = useState({
     name: "",
     phone: "",
@@ -19,108 +14,78 @@ const App = () => {
     qualification: "highschool",
     file: null,
   });
-
   const [errors, setErrors] = useState({});
   const [rememberMe, setRememberMe] = useState(false);
   const [agreeTerms, setAgreeTerms] = useState(false);
+  const [preview, setPreview] = useState(null);
 
   const showForm = (form) => setActiveTab(form);
 
-  // === Handle Input Changes ===
   const handleLoginChange = (e) => {
     setLoginForm({ ...loginForm, [e.target.name]: e.target.value });
   };
 
   const handleSignupChange = (e) => {
     const { name, value, files } = e.target;
-    setSignupForm({ ...signupForm, [name]: files ? files[0] : value });
+    if (files) {
+      setSignupForm({ ...signupForm, [name]: files[0] });
+      setPreview(URL.createObjectURL(files[0]));
+    } else {
+      setSignupForm({ ...signupForm, [name]: value });
+    }
   };
 
-  // === VALIDATION HELPERS ===
   const validateLogin = () => {
-    let tempErrors = {};
-    if (!loginForm.email) tempErrors.email = "Email is required";
-    else if (!/\S+@\S+\.\S+/.test(loginForm.email))
-      tempErrors.email = "Invalid email format";
-    if (!loginForm.password) tempErrors.password = "Password is required";
-    else if (loginForm.password.length < 6)
-      tempErrors.password = "Password must be at least 6 characters";
-    return tempErrors;
+    let temp = {};
+    if (!loginForm.email) temp.email = "Email is required";
+    if (!loginForm.password) temp.password = "Password is required";
+    return temp;
   };
 
   const validateSignup = () => {
-    let tempErrors = {};
-
-    if (!signupForm.name.trim()) tempErrors.name = "Full name is required";
-
-    if (!signupForm.phone) tempErrors.phone = "Phone number is required";
+    let temp = {};
+    if (!signupForm.name.trim()) temp.name = "Full name is required";
+    if (!signupForm.phone) temp.phone = "Phone number is required";
     else if (!/^\d{10}$/.test(signupForm.phone))
-      tempErrors.phone = "Enter a valid 10-digit phone number";
-
-    if (!signupForm.dob) tempErrors.dob = "Date of birth is required";
-
-    if (!signupForm.email) tempErrors.email = "Email is required";
-    else if (!/\S+@\S+\.\S+/.test(signupForm.email))
-      tempErrors.email = "Invalid email format";
-
-    if (!signupForm.password) tempErrors.password = "Password is required";
-    else if (signupForm.password.length < 6)
-      tempErrors.password = "Password must be at least 6 characters long";
-    else if (!/\d/.test(signupForm.password))
-      tempErrors.password = "Password must contain at least one number";
-
-    if (!signupForm.qualification)
-      tempErrors.qualification = "Select a qualification";
-
-    if (!signupForm.file) tempErrors.file = "Please upload a photo";
-
+      temp.phone = "Enter a valid 10-digit phone number";
+    if (!signupForm.dob) temp.dob = "Date of birth is required";
+    if (!signupForm.email) temp.email = "Email is required";
+    if (!signupForm.password) temp.password = "Password is required";
+    if (!signupForm.file) temp.file = "Please upload a photo";
     if (!agreeTerms)
-      tempErrors.agreeTerms = "You must agree to the terms and conditions";
-
-    return tempErrors;
+      temp.agreeTerms = "You must agree to the terms and conditions";
+    return temp;
   };
 
-  // === LOGIN SUBMIT ===
   const handleLoginSubmit = async () => {
     const validationErrors = validateLogin();
     setErrors(validationErrors);
-
-    if (Object.keys(validationErrors).length > 0) {
-      alert("Please fix login errors before continuing");
-      return;
-    }
+    if (Object.keys(validationErrors).length > 0) return;
 
     try {
       const res = await axios.post("http://localhost:5000/login", loginForm);
       alert(res.data.message);
-      console.log("Logged in user:", res.data.user);
     } catch (err) {
       alert(err.response?.data?.error || err.message);
     }
   };
 
-  // === SIGNUP SUBMIT ===
   const handleSignupSubmit = async () => {
     const validationErrors = validateSignup();
     setErrors(validationErrors);
-
-    if (Object.keys(validationErrors).length > 0) {
-      alert("Please fix signup errors before continuing");
-      return;
-    }
+    if (Object.keys(validationErrors).length > 0) return;
 
     try {
       const formData = new FormData();
-      Object.entries(signupForm).forEach(([key, value]) => {
-        formData.append(key, value);
-      });
+      Object.entries(signupForm).forEach(([key, value]) =>
+        formData.append(key, value)
+      );
 
       const res = await axios.post("http://localhost:5000/register", formData, {
         headers: { "Content-Type": "multipart/form-data" },
       });
 
       alert(res.data.message);
-
       setSignupForm({
         name: "",
         phone: "",
@@ -131,8 +96,7 @@ const App = () => {
         file: null,
       });
       setAgreeTerms(false);
-      setErrors({});
-      setActiveTab("login");
+      setPreview(null);
     } catch (err) {
       alert(err.response?.data?.error || err.message);
     }
@@ -158,7 +122,6 @@ const App = () => {
           </button>
         </div>
 
-        {/* === LOGIN FORM === */}
         {activeTab === "login" && (
           <div className="form active">
             <div className="form-group">
@@ -168,7 +131,6 @@ const App = () => {
                 name="email"
                 value={loginForm.email}
                 onChange={handleLoginChange}
-                placeholder="example@mail.com"
               />
               {errors.email && <p className="error">{errors.email}</p>}
             </div>
@@ -180,29 +142,16 @@ const App = () => {
                 name="password"
                 value={loginForm.password}
                 onChange={handleLoginChange}
-                placeholder="Enter password"
               />
               {errors.password && <p className="error">{errors.password}</p>}
             </div>
 
-            <div className="checkbox">
-              <input
-                type="checkbox"
-                checked={rememberMe}
-                onChange={(e) => setRememberMe(e.target.checked)}
-              />
-              Remember me
-            </div>
-
-            <div className="forgot">Forgot Password?</div>
-
             <button className="btn" onClick={handleLoginSubmit}>
-              Login Now
+              Login
             </button>
           </div>
         )}
 
-        {/* === SIGNUP FORM === */}
         {activeTab === "signup" && (
           <div className="form active">
             <div className="form-group">
@@ -223,7 +172,6 @@ const App = () => {
                 name="phone"
                 value={signupForm.phone}
                 onChange={handleSignupChange}
-                placeholder="0000000000"
               />
               {errors.phone && <p className="error">{errors.phone}</p>}
             </div>
@@ -246,7 +194,6 @@ const App = () => {
                 name="email"
                 value={signupForm.email}
                 onChange={handleSignupChange}
-                placeholder="example@mail.com"
               />
               {errors.email && <p className="error">{errors.email}</p>}
             </div>
@@ -258,7 +205,6 @@ const App = () => {
                 name="password"
                 value={signupForm.password}
                 onChange={handleSignupChange}
-                placeholder="Enter password"
               />
               {errors.password && <p className="error">{errors.password}</p>}
             </div>
@@ -275,14 +221,19 @@ const App = () => {
                 <option value="graduation">Graduation</option>
                 <option value="postgraduation">Post Graduation</option>
               </select>
-              {errors.qualification && (
-                <p className="error">{errors.qualification}</p>
-              )}
             </div>
 
             <div className="form-group">
               <label>Passport Size Photo</label>
               <input type="file" name="file" onChange={handleSignupChange} />
+              {preview && (
+                <img
+                  src={preview}
+                  alt="Preview"
+                  className="preview-img"
+                  width="100"
+                />
+              )}
               {errors.file && <p className="error">{errors.file}</p>}
             </div>
 
