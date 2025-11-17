@@ -1,0 +1,183 @@
+/* ---------- GLOBAL ---------- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+body.light {
+  background: #f5f5f5;
+  color: #222;
+  transition: 0.3s ease;
+}
+
+body.dark {
+  background: #1b1b1b;
+  color: #f5f5f5;
+  transition: 0.3s ease;
+}
+
+.app {
+  padding: 30px;
+}
+
+/* ---------- THEME BUTTON ---------- */
+.theme-btn {
+  padding: 10px 18px;
+  background: #444;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-bottom: 20px;
+  transition: 0.3s;
+}
+
+.theme-btn:hover {
+  background: #000;
+}
+
+/* ---------- TABS ---------- */
+.tabs {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 25px;
+}
+
+.tabs button {
+  padding: 10px 22px;
+  background: #ccc;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+.tabs button.active {
+  background: #1e88e5;
+  color: #fff;
+}
+
+.tabs button:hover {
+  background: #aaa;
+}
+
+/* ---------- MOVIE GRID ---------- */
+.movie-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 25px;
+  padding-top: 20px;
+}
+
+/* ---------- MOVIE CARD ---------- */
+.movie-card {
+  background: rgba(255,255,255,0.05);
+  border-radius: 12px;
+  padding: 12px;
+  cursor: pointer;
+  text-align: center;
+  border: 1px solid rgba(0,0,0,0.1);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+body.dark .movie-card {
+  border: 1px solid rgba(255,255,255,0.1);
+}
+
+.movie-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0px 8px 20px rgba(0,0,0,0.2);
+}
+
+.movie-card img {
+  width: 100%;
+  border-radius: 10px;
+  height: 300px;
+  object-fit: cover;
+  margin-bottom: 12px;
+}
+
+.movie-card h3 {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+/* ---------- MODAL ---------- */
+.modal-bg {
+  position: fixed;
+  inset: 0;
+  backdrop-filter: blur(4px);
+  background: rgba(0,0,0,0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; } 
+  to { opacity: 1; }
+}
+
+.modal {
+  background: white;
+  padding: 25px;
+  width: 520px;
+  max-height: 90vh;
+  overflow-y: auto;
+  border-radius: 14px;
+  animation: scaleUp 0.3s ease;
+}
+
+body.dark .modal {
+  background: #282828;
+}
+
+@keyframes scaleUp {
+  from { transform: scale(0.7); }
+  to { transform: scale(1); }
+}
+
+.modal img {
+  width: 100%;
+  border-radius: 10px;
+  margin-bottom: 15px;
+}
+
+.modal h2 {
+  margin-bottom: 10px;
+}
+
+.modal button {
+  background: #e53935;
+  padding: 10px 16px;
+  color: white;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  margin-top: 15px;
+  transition: 0.3s;
+}
+
+.modal button:hover {
+  background: #b71c1c;
+}
+
+/* ---------- SEARCH INPUT ---------- */
+input {
+  width: 60%;
+  padding: 12px 18px;
+  border-radius: 8px;
+  border: 2px solid #ccc;
+  margin-bottom: 15px;
+  font-size: 16px;
+  transition: 0.3s;
+}
+
+input:focus {
+  border-color: #1e88e5;
+  outline: none;
+}
